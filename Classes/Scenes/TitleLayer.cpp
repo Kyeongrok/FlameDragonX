@@ -114,7 +114,51 @@ bool TitleLayer::init()
     
     buttonContinue->setEnabled(false);
     _screen->addToVisible(buttonContinue, Vec2(380, locationY), 1.5f, 10);
-    
+
+    std::vector<Button*> menuButtons = { buttonStart, buttonLoad, buttonContinue };
+    auto selected = std::make_shared<int>(0);
+    auto applySelection = [menuButtons, selected]() {
+        for (size_t i = 0; i < menuButtons.size(); ++i) {
+            menuButtons[i]->setScale(((int)i == *selected) ? 1.7f : 1.5f);
+        }
+    };
+    applySelection();
+
+    auto kbListener = EventListenerKeyboard::create();
+    kbListener->onKeyPressed = [this, menuButtons, selected, applySelection](EventKeyboard::KeyCode code, Event*) {
+        int n = (int)menuButtons.size();
+        auto step = [&](int dir) {
+            for (int i = 1; i <= n; ++i) {
+                int next = ((*selected) + dir * i + n) % n;
+                if (menuButtons[next]->isEnabled()) { *selected = next; applySelection(); return; }
+            }
+        };
+        switch (code) {
+            case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
+            case EventKeyboard::KeyCode::KEY_UP_ARROW:
+                step(-1); break;
+            case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
+            case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
+                step(+1); break;
+            case EventKeyboard::KeyCode::KEY_ENTER:
+            case EventKeyboard::KeyCode::KEY_KP_ENTER:
+            case EventKeyboard::KeyCode::KEY_SPACE:
+                if (menuButtons[*selected]->isEnabled()) {
+                    switch (*selected) {
+                        case 0: this->onStartGame(); break;
+                        case 1: this->onLoadGame(); break;
+                        case 2: this->onContinueGame(); break;
+                    }
+                }
+                break;
+            case EventKeyboard::KeyCode::KEY_ESCAPE:
+                Director::getInstance()->end();
+                break;
+            default: break;
+        }
+    };
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(kbListener, this);
+
     return true;
 }
 

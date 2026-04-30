@@ -118,6 +118,40 @@ void BattleField::initWithChapter(int chapterId)
     
     // State Dispatcher
     _stateDispatcher = new StateDispatcher(_battleScene);
+
+    // Keyboard navigation: arrow keys move cursor, Enter/Space confirms
+    auto kbListener = EventListenerKeyboard::create();
+    kbListener->onKeyPressed = [this](EventKeyboard::KeyCode code, Event*) {
+        if (this->isInteractiveBusy()) return;
+        Vec2 pos = this->getCursorPosition();
+        Vec2 target = pos;
+        switch (code) {
+            case EventKeyboard::KeyCode::KEY_LEFT_ARROW:  target.x -= 1; break;
+            case EventKeyboard::KeyCode::KEY_RIGHT_ARROW: target.x += 1; break;
+            case EventKeyboard::KeyCode::KEY_UP_ARROW:    target.y += 1; break;
+            case EventKeyboard::KeyCode::KEY_DOWN_ARROW:  target.y -= 1; break;
+            case EventKeyboard::KeyCode::KEY_ENTER:
+            case EventKeyboard::KeyCode::KEY_KP_ENTER:
+            case EventKeyboard::KeyCode::KEY_SPACE:
+                this->_stateDispatcher->handleClickAt(pos);
+                return;
+            case EventKeyboard::KeyCode::KEY_ESCAPE: {
+                bool hasMenu = false;
+                for (BattleObject * object : *this->_battleObjectList) {
+                    if (object->getObjectType() == BattleObject_Menu && !object->isRemoving()) {
+                        hasMenu = true; break;
+                    }
+                }
+                if (hasMenu) this->closeMenu(true);
+                return;
+            }
+            default: return;
+        }
+        if (target.x < 1 || target.y < 1 ||
+            target.x > this->_fieldWidth || target.y > this->_fieldHeight) return;
+        this->setCursorTo(target);
+    };
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(kbListener, this);
     
     /*
     Creature * creature = new Creature(CreatureType_Friend);

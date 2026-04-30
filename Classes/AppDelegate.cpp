@@ -44,7 +44,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto glview = director->getOpenGLView();
     if(!glview) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-        glview = GLViewImpl::createWithRect("FlameDragonX", cocos2d::Rect(0, 0, designResolutionSize.width, designResolutionSize.height));
+        glview = GLViewImpl::createWithRect("FlameDragonX", cocos2d::Rect(0, 0, 1440, 960));
 #else
         glview = GLViewImpl::create("FlameDragonX");
 #endif
@@ -78,6 +78,20 @@ bool AppDelegate::applicationDidFinishLaunching() {
     }
     
     srand((unsigned int)time(nullptr));
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+    {
+        auto fileUtils = FileUtils::getInstance();
+        auto paths = fileUtils->getSearchPaths();
+        const char* extra[] = {
+            "Animations", "Backgrounds", "Data", "Data/Maps", "Dato",
+            "Fights", "fonts", "Icons", "Magic", "Maps",
+            "Menu", "Others", "res", "Strings", "Tais", "Title", "Village"
+        };
+        for (auto p : extra) paths.push_back(p);
+        fileUtils->setSearchPaths(paths);
+    }
+#endif
 
     register_all_packages();
 

@@ -71,7 +71,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(EngineRoot)external;$(EngineRoot)cocos\audio\include;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;..\Classes;..;%(AdditionalIncludeDirectories);$(_COCOS_HEADER_WIN32_BEGIN);$(_COCOS_HEADER_WIN32_END)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(EngineRoot)external;$(EngineRoot)cocos\audio\include;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;..\Classes;..\Classes\Actions;..\Classes\Activities;..\Classes\Algorithms;..\Classes\Animation;..\Classes\Battle;..\Classes\Battle\AI;..\Classes\Battle\Events;..\Classes\Battle\Events\Chapter;..\Classes\Battle\Events\Condition;..\Classes\Common;..\Classes\Common\utf8;..\Classes\Controls;..\Classes\Data;..\Classes\Data\Item;..\Classes\Dispatchers;..\Classes\Fight;..\Classes\Messages;..\Classes\Objects;..\Classes\Records;..\Classes\Scenes;..\Classes\Shopping;..\Classes\Shopping\ActiveDialog;..\Classes\Shopping\ActiveDialog\PagedDialog;..\Classes\Shopping\HomeDialog;..;%(AdditionalIncludeDirectories);$(_COCOS_HEADER_WIN32_BEGIN);$(_COCOS_HEADER_WIN32_END)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USE_MATH_DEFINES;GL_GLEXT_PROTOTYPES;CC_ENABLE_CHIPMUNK_INTEGRATION=1;COCOS2D_DEBUG=1;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -79,7 +79,7 @@
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
       <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -113,14 +113,14 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(EngineRoot)external;$(EngineRoot)cocos\audio\include;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;..\Classes;..;%(AdditionalIncludeDirectories);$(_COCOS_HEADER_WIN32_BEGIN);$(_COCOS_HEADER_WIN32_END)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(EngineRoot)external;$(EngineRoot)cocos\audio\include;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;..\Classes;..\Classes\Actions;..\Classes\Activities;..\Classes\Algorithms;..\Classes\Animation;..\Classes\Battle;..\Classes\Battle\AI;..\Classes\Battle\Events;..\Classes\Battle\Events\Chapter;..\Classes\Battle\Events\Condition;..\Classes\Common;..\Classes\Common\utf8;..\Classes\Controls;..\Classes\Data;..\Classes\Data\Item;..\Classes\Dispatchers;..\Classes\Fight;..\Classes\Messages;..\Classes\Objects;..\Classes\Records;..\Classes\Scenes;..\Classes\Shopping;..\Classes\Shopping\ActiveDialog;..\Classes\Shopping\ActiveDialog\PagedDialog;..\Classes\Shopping\HomeDialog;..;%(AdditionalIncludeDirectories);$(_COCOS_HEADER_WIN32_BEGIN);$(_COCOS_HEADER_WIN32_END)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USE_MATH_DEFINES;GL_GLEXT_PROTOTYPES;CC_ENABLE_CHIPMUNK_INTEGRATION=1;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
       <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -143,14 +143,360 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Classes\AppDelegate.cpp" />
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\Classes\Actions\CombinedAnimate.cpp" />
+    <ClCompile Include="..\Classes\Actions\FDAnimate.cpp" />
+    <ClCompile Include="..\Classes\Activities\ActivityQueue.cpp" />
+    <ClCompile Include="..\Classes\Activities\AnimateActivity.cpp" />
+    <ClCompile Include="..\Classes\Activities\BatchActivity.cpp" />
+    <ClCompile Include="..\Classes\Activities\CallbackActivity.cpp" />
+    <ClCompile Include="..\Classes\Activities\CombinedActivity.cpp" />
+    <ClCompile Include="..\Classes\Activities\CreatureDeadActivity.cpp" />
+    <ClCompile Include="..\Classes\Activities\CreatureMoveActivity.cpp" />
+    <ClCompile Include="..\Classes\Activities\CursorMoveActivity.cpp" />
+    <ClCompile Include="..\Classes\Activities\DurationActivity.cpp" />
+    <ClCompile Include="..\Classes\Activities\FDActivity.cpp" />
+    <ClCompile Include="..\Classes\Activities\FieldActivity.cpp" />
+    <ClCompile Include="..\Classes\Activities\GlobalActivity.cpp" />
+    <ClCompile Include="..\Classes\Activities\MoveByActivity.cpp" />
+    <ClCompile Include="..\Classes\Activities\RemoveObjectActivity.cpp" />
+    <ClCompile Include="..\Classes\Activities\ShowMessageActivity.cpp" />
+    <ClCompile Include="..\Classes\Activities\SimpleMoveActivity.cpp" />
+    <ClCompile Include="..\Classes\Activities\SpriteMoveActivity.cpp" />
+    <ClCompile Include="..\Classes\Activities\TalkActivity.cpp" />
+    <ClCompile Include="..\Classes\Algorithms\CounterObject.cpp" />
+    <ClCompile Include="..\Classes\Algorithms\CounterResult.cpp" />
+    <ClCompile Include="..\Classes\Algorithms\FightResult.cpp" />
+    <ClCompile Include="..\Classes\Algorithms\GameFormula.cpp" />
+    <ClCompile Include="..\Classes\Algorithms\MagicResult.cpp" />
+    <ClCompile Include="..\Classes\Algorithms\MovePathResolver.cpp" />
+    <ClCompile Include="..\Classes\Algorithms\MoveScopeResolver.cpp" />
+    <ClCompile Include="..\Classes\Algorithms\RangeScopeResolver.cpp" />
+    <ClCompile Include="..\Classes\Algorithms\ResolverHelper.cpp" />
+    <ClCompile Include="..\Classes\Animation\AnimationLibrary.cpp" />
+    <ClCompile Include="..\Classes\Animation\FDFrame.cpp" />
+    <ClCompile Include="..\Classes\Animation\FightAnimation.cpp" />
+    <ClCompile Include="..\Classes\Animation\FightFrame.cpp" />
+    <ClCompile Include="..\Classes\Animation\OffsetFrame.cpp" />
+    <ClCompile Include="..\Classes\Animation\SlideAnimation.cpp" />
+    <ClCompile Include="..\Classes\Animation\TextureComposer.cpp" />
+    <ClCompile Include="..\Classes\Animation\TransparencyFrame.cpp" />
+    <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\Battle\AI\AIActiveDelegate.cpp" />
+    <ClCompile Include="..\Classes\Battle\AI\AIAggressiveDelegate.cpp" />
+    <ClCompile Include="..\Classes\Battle\AI\AIDefensiveDelegate.cpp" />
+    <ClCompile Include="..\Classes\Battle\AI\AIDelegate.cpp" />
+    <ClCompile Include="..\Classes\Battle\AI\AIHandler.cpp" />
+    <ClCompile Include="..\Classes\Battle\AI\AIMagicAggressiveDelegate.cpp" />
+    <ClCompile Include="..\Classes\Battle\AI\AIMagicDefensiveDelegate.cpp" />
+    <ClCompile Include="..\Classes\Battle\AI\AIStandByDelegate.cpp" />
+    <ClCompile Include="..\Classes\Battle\BattleField.cpp" />
+    <ClCompile Include="..\Classes\Battle\BattleScene.cpp" />
+    <ClCompile Include="..\Classes\Battle\EventMethod.cpp" />
+    <ClCompile Include="..\Classes\Battle\Events\Chapter\EventChapter1.cpp" />
+    <ClCompile Include="..\Classes\Battle\Events\Chapter\EventChapterCommon.cpp" />
+    <ClCompile Include="..\Classes\Battle\Events\Condition\AnyTurnCondition.cpp" />
+    <ClCompile Include="..\Classes\Battle\Events\Condition\ArrivePositionCondition.cpp" />
+    <ClCompile Include="..\Classes\Battle\Events\Condition\ArrivePositionTurnCondition.cpp" />
+    <ClCompile Include="..\Classes\Battle\Events\Condition\CreatureDeadCondition.cpp" />
+    <ClCompile Include="..\Classes\Battle\Events\Condition\CreatureDyingCondition.cpp" />
+    <ClCompile Include="..\Classes\Battle\Events\Condition\EventCondition.cpp" />
+    <ClCompile Include="..\Classes\Battle\Events\Condition\TeamEliminatedCondition.cpp" />
+    <ClCompile Include="..\Classes\Battle\Events\Condition\TurnCondition.cpp" />
+    <ClCompile Include="..\Classes\Battle\Events\EventHandler.cpp" />
+    <ClCompile Include="..\Classes\Battle\Events\EventLoader.cpp" />
+    <ClCompile Include="..\Classes\Battle\Events\EventLoaderFactory.cpp" />
+    <ClCompile Include="..\Classes\Battle\Events\FDEvent.cpp" />
+    <ClCompile Include="..\Classes\Battle\Ground.cpp" />
+    <ClCompile Include="..\Classes\Battle\MessageLayer.cpp" />
+    <ClCompile Include="..\Classes\Battle\TouchHandler.cpp" />
+    <ClCompile Include="..\Classes\Common\CallbackMethod.cpp" />
+    <ClCompile Include="..\Classes\Common\CommonHelper.cpp" />
+    <ClCompile Include="..\Classes\Common\Constants.cpp" />
+    <ClCompile Include="..\Classes\Common\FDNumber.cpp" />
+    <ClCompile Include="..\Classes\Common\FDPoint.cpp" />
+    <ClCompile Include="..\Classes\Common\FDRandom.cpp" />
+    <ClCompile Include="..\Classes\Common\FDRange.cpp" />
+    <ClCompile Include="..\Classes\Common\PointMap.cpp" />
+    <ClCompile Include="..\Classes\Common\ResourceManager.cpp" />
+    <ClCompile Include="..\Classes\Common\StringUtil.cpp" />
+    <ClCompile Include="..\Classes\Common\TextFileReader.cpp" />
+    <ClCompile Include="..\Classes\Controls\ScaledSprite.cpp" />
+    <ClCompile Include="..\Classes\Controls\TouchableLabel.cpp" />
+    <ClCompile Include="..\Classes\Controls\TouchableSprite.cpp" />
+    <ClCompile Include="..\Classes\Data\CreatureDefinition.cpp" />
+    <ClCompile Include="..\Classes\Data\DataStore.cpp" />
+    <ClCompile Include="..\Classes\Data\FightAnimationDefinition.cpp" />
+    <ClCompile Include="..\Classes\Data\FightFrameDefinition.cpp" />
+    <ClCompile Include="..\Classes\Data\Item\AttackItemDefinition.cpp" />
+    <ClCompile Include="..\Classes\Data\Item\DefendItemDefinition.cpp" />
+    <ClCompile Include="..\Classes\Data\Item\ItemDefinition.cpp" />
+    <ClCompile Include="..\Classes\Data\Item\MoneyItemDefinition.cpp" />
+    <ClCompile Include="..\Classes\Data\Item\SpecialItemDefinition.cpp" />
+    <ClCompile Include="..\Classes\Data\Item\UsableItemDefinition.cpp" />
+    <ClCompile Include="..\Classes\Data\LevelUpDefinition.cpp" />
+    <ClCompile Include="..\Classes\Data\LevelUpMagicDefinition.cpp" />
+    <ClCompile Include="..\Classes\Data\LocalizedStrings.cpp" />
+    <ClCompile Include="..\Classes\Data\MagicAnimationDefinition.cpp" />
+    <ClCompile Include="..\Classes\Data\MagicDefinition.cpp" />
+    <ClCompile Include="..\Classes\Data\OccupationDefinition.cpp" />
+    <ClCompile Include="..\Classes\Data\ShopDefinition.cpp" />
+    <ClCompile Include="..\Classes\Data\TransferDefinition.cpp" />
+    <ClCompile Include="..\Classes\Data\TransfersDefinition.cpp" />
+    <ClCompile Include="..\Classes\Dispatchers\ActionMenuState.cpp" />
+    <ClCompile Include="..\Classes\Dispatchers\ActionState.cpp" />
+    <ClCompile Include="..\Classes\Dispatchers\ExchangeItemTargetState.cpp" />
+    <ClCompile Include="..\Classes\Dispatchers\IdleState.cpp" />
+    <ClCompile Include="..\Classes\Dispatchers\ItemMenuState.cpp" />
+    <ClCompile Include="..\Classes\Dispatchers\RecordMenuState.cpp" />
+    <ClCompile Include="..\Classes\Dispatchers\SelectAttackTargetState.cpp" />
+    <ClCompile Include="..\Classes\Dispatchers\SelectItemTargetState.cpp" />
+    <ClCompile Include="..\Classes\Dispatchers\SelectMagicTargetState.cpp" />
+    <ClCompile Include="..\Classes\Dispatchers\SettingsMenuState.cpp" />
+    <ClCompile Include="..\Classes\Dispatchers\ShowMoveScopeState.cpp" />
+    <ClCompile Include="..\Classes\Dispatchers\StateDispatcher.cpp" />
+    <ClCompile Include="..\Classes\Dispatchers\StateSession.cpp" />
+    <ClCompile Include="..\Classes\Dispatchers\SystemMenuState.cpp" />
+    <ClCompile Include="..\Classes\Fight\CounterInfo.cpp" />
+    <ClCompile Include="..\Classes\Fight\CounterScene.cpp" />
+    <ClCompile Include="..\Classes\Fight\FightScene.cpp" />
+    <ClCompile Include="..\Classes\Fight\MagicScene.cpp" />
+    <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="..\Classes\Messages\CompositeBox.cpp" />
+    <ClCompile Include="..\Classes\Messages\ConfirmMessage.cpp" />
+    <ClCompile Include="..\Classes\Messages\ConversationMessage.cpp" />
+    <ClCompile Include="..\Classes\Messages\CreatureInfoMessage.cpp" />
+    <ClCompile Include="..\Classes\Messages\DatoBar.cpp" />
+    <ClCompile Include="..\Classes\Messages\DetailBar.cpp" />
+    <ClCompile Include="..\Classes\Messages\ItemBox.cpp" />
+    <ClCompile Include="..\Classes\Messages\MagicBox.cpp" />
+    <ClCompile Include="..\Classes\Messages\Message.cpp" />
+    <ClCompile Include="..\Classes\Messages\SelectableBox.cpp" />
+    <ClCompile Include="..\Classes\Messages\SpeakMessage.cpp" />
+    <ClCompile Include="..\Classes\Messages\TalkMessage.cpp" />
+    <ClCompile Include="..\Classes\Messages\VillageLabel.cpp" />
+    <ClCompile Include="..\Classes\Objects\AICreature.cpp" />
+    <ClCompile Include="..\Classes\Objects\BattleObject.cpp" />
+    <ClCompile Include="..\Classes\Objects\Creature.cpp" />
+    <ClCompile Include="..\Classes\Objects\CreatureData.cpp" />
+    <ClCompile Include="..\Classes\Objects\Cursor.cpp" />
+    <ClCompile Include="..\Classes\Objects\Enemy.cpp" />
+    <ClCompile Include="..\Classes\Objects\Friend.cpp" />
+    <ClCompile Include="..\Classes\Objects\MenuCursor.cpp" />
+    <ClCompile Include="..\Classes\Objects\Npc.cpp" />
+    <ClCompile Include="..\Classes\Objects\RoutePoint.cpp" />
+    <ClCompile Include="..\Classes\Objects\ScopeIndicator.cpp" />
+    <ClCompile Include="..\Classes\Objects\Treasure.cpp" />
+    <ClCompile Include="..\Classes\Records\BattleRecord.cpp" />
+    <ClCompile Include="..\Classes\Records\ChapterRecord.cpp" />
+    <ClCompile Include="..\Classes\Records\CreatureChapterRecord.cpp" />
+    <ClCompile Include="..\Classes\Records\CreatureRecord.cpp" />
+    <ClCompile Include="..\Classes\Scenes\FDScreen.cpp" />
+    <ClCompile Include="..\Classes\Scenes\GameOverLayer.cpp" />
+    <ClCompile Include="..\Classes\Scenes\LoadingLayer.cpp" />
+    <ClCompile Include="..\Classes\Scenes\SceneCreator.cpp" />
+    <ClCompile Include="..\Classes\Scenes\ShoppingLayer.cpp" />
+    <ClCompile Include="..\Classes\Scenes\TitleLayer.cpp" />
+    <ClCompile Include="..\Classes\Scenes\VillageLayer.cpp" />
+    <ClCompile Include="..\Classes\Scenes\VillageNormalLayer.cpp" />
+    <ClCompile Include="..\Classes\Scenes\VillageVacuumLayer.cpp" />
+    <ClCompile Include="..\Classes\Shopping\ActiveDialog\PagedDialog\ShoppingPagedDialog.cpp" />
+    <ClCompile Include="..\Classes\Shopping\ActiveDialog\PagedDialog\ShoppingSelectAmorTargetDialog.cpp" />
+    <ClCompile Include="..\Classes\Shopping\ActiveDialog\PagedDialog\ShoppingShowFriendsDialog.cpp" />
+    <ClCompile Include="..\Classes\Shopping\ActiveDialog\PagedDialog\ShoppingShowItemsDialog.cpp" />
+    <ClCompile Include="..\Classes\Shopping\ActiveDialog\PagedDialog\ShoppingShowTransferDialog.cpp" />
+    <ClCompile Include="..\Classes\Shopping\ActiveDialog\ShoppingActiveDialog.cpp" />
+    <ClCompile Include="..\Classes\Shopping\ActiveDialog\ShoppingConfirmDialog.cpp" />
+    <ClCompile Include="..\Classes\Shopping\ActiveDialog\ShoppingMessageDialog.cpp" />
+    <ClCompile Include="..\Classes\Shopping\ActiveDialog\ShoppingRecordDialog.cpp" />
+    <ClCompile Include="..\Classes\Shopping\HomeDialog\ShoppingAmorDialog.cpp" />
+    <ClCompile Include="..\Classes\Shopping\HomeDialog\ShoppingBarDialog.cpp" />
+    <ClCompile Include="..\Classes\Shopping\HomeDialog\ShoppingChurchDialog.cpp" />
+    <ClCompile Include="..\Classes\Shopping\HomeDialog\ShoppingHomeDialog.cpp" />
+    <ClCompile Include="..\Classes\Shopping\HomeDialog\ShoppingItemDialog.cpp" />
+    <ClCompile Include="..\Classes\Shopping\HomeDialog\ShoppingSecretDialog.cpp" />
+    <ClCompile Include="..\Classes\Shopping\HomeDialog\ShoppingShopDialog.cpp" />
+    <ClCompile Include="..\Classes\Shopping\ShoppingDialog.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Classes\AppDelegate.h" />
-    <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="..\Classes\Actions\CombinedAnimate.hpp" />
+    <ClInclude Include="..\Classes\Actions\FDAnimate.hpp" />
+    <ClInclude Include="..\Classes\Activities\ActivityQueue.hpp" />
+    <ClInclude Include="..\Classes\Activities\AnimateActivity.hpp" />
+    <ClInclude Include="..\Classes\Activities\BatchActivity.hpp" />
+    <ClInclude Include="..\Classes\Activities\CallbackActivity.hpp" />
+    <ClInclude Include="..\Classes\Activities\CombinedActivity.hpp" />
+    <ClInclude Include="..\Classes\Activities\CreatureDeadActivity.hpp" />
+    <ClInclude Include="..\Classes\Activities\CreatureMoveActivity.hpp" />
+    <ClInclude Include="..\Classes\Activities\CursorMoveActivity.hpp" />
+    <ClInclude Include="..\Classes\Activities\DurationActivity.hpp" />
+    <ClInclude Include="..\Classes\Activities\FDActivity.hpp" />
+    <ClInclude Include="..\Classes\Activities\FieldActivity.hpp" />
+    <ClInclude Include="..\Classes\Activities\GlobalActivity.hpp" />
+    <ClInclude Include="..\Classes\Activities\MoveByActivity.hpp" />
+    <ClInclude Include="..\Classes\Activities\RemoveObjectActivity.hpp" />
+    <ClInclude Include="..\Classes\Activities\ShowMessageActivity.hpp" />
+    <ClInclude Include="..\Classes\Activities\SimpleMoveActivity.hpp" />
+    <ClInclude Include="..\Classes\Activities\SpriteMoveActivity.hpp" />
+    <ClInclude Include="..\Classes\Activities\TalkActivity.hpp" />
+    <ClInclude Include="..\Classes\Algorithms\CounterObject.hpp" />
+    <ClInclude Include="..\Classes\Algorithms\CounterResult.hpp" />
+    <ClInclude Include="..\Classes\Algorithms\FightResult.hpp" />
+    <ClInclude Include="..\Classes\Algorithms\GameFormula.hpp" />
+    <ClInclude Include="..\Classes\Algorithms\MagicResult.hpp" />
+    <ClInclude Include="..\Classes\Algorithms\MovePathResolver.hpp" />
+    <ClInclude Include="..\Classes\Algorithms\MoveScopeResolver.hpp" />
+    <ClInclude Include="..\Classes\Algorithms\RangeScopeResolver.hpp" />
+    <ClInclude Include="..\Classes\Algorithms\ResolverHelper.hpp" />
+    <ClInclude Include="..\Classes\Animation\AnimationLibrary.hpp" />
+    <ClInclude Include="..\Classes\Animation\FDFrame.hpp" />
+    <ClInclude Include="..\Classes\Animation\FightAnimation.hpp" />
+    <ClInclude Include="..\Classes\Animation\FightFrame.hpp" />
+    <ClInclude Include="..\Classes\Animation\OffsetFrame.hpp" />
+    <ClInclude Include="..\Classes\Animation\SlideAnimation.hpp" />
+    <ClInclude Include="..\Classes\Animation\TextureComposer.hpp" />
+    <ClInclude Include="..\Classes\Animation\TransparencyFrame.hpp" />
+    <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\Battle\AI\AIActiveDelegate.hpp" />
+    <ClInclude Include="..\Classes\Battle\AI\AIAggressiveDelegate.hpp" />
+    <ClInclude Include="..\Classes\Battle\AI\AIDefensiveDelegate.hpp" />
+    <ClInclude Include="..\Classes\Battle\AI\AIDelegate.hpp" />
+    <ClInclude Include="..\Classes\Battle\AI\AIHandler.hpp" />
+    <ClInclude Include="..\Classes\Battle\AI\AIMagicAggressiveDelegate.hpp" />
+    <ClInclude Include="..\Classes\Battle\AI\AIMagicDefensiveDelegate.hpp" />
+    <ClInclude Include="..\Classes\Battle\AI\AIStandByDelegate.hpp" />
+    <ClInclude Include="..\Classes\Battle\BattleField.hpp" />
+    <ClInclude Include="..\Classes\Battle\BattleScene.hpp" />
+    <ClInclude Include="..\Classes\Battle\EventMethod.hpp" />
+    <ClInclude Include="..\Classes\Battle\Events\Chapter\EventChapter1.hpp" />
+    <ClInclude Include="..\Classes\Battle\Events\Chapter\EventChapterCommon.hpp" />
+    <ClInclude Include="..\Classes\Battle\Events\Condition\AnyTurnCondition.hpp" />
+    <ClInclude Include="..\Classes\Battle\Events\Condition\ArrivePositionCondition.hpp" />
+    <ClInclude Include="..\Classes\Battle\Events\Condition\ArrivePositionTurnCondition.hpp" />
+    <ClInclude Include="..\Classes\Battle\Events\Condition\CreatureDeadCondition.hpp" />
+    <ClInclude Include="..\Classes\Battle\Events\Condition\CreatureDyingCondition.hpp" />
+    <ClInclude Include="..\Classes\Battle\Events\Condition\EventCondition.hpp" />
+    <ClInclude Include="..\Classes\Battle\Events\Condition\TeamEliminatedCondition.hpp" />
+    <ClInclude Include="..\Classes\Battle\Events\Condition\TurnCondition.hpp" />
+    <ClInclude Include="..\Classes\Battle\Events\EventHandler.hpp" />
+    <ClInclude Include="..\Classes\Battle\Events\EventLoader.hpp" />
+    <ClInclude Include="..\Classes\Battle\Events\EventLoaderFactory.hpp" />
+    <ClInclude Include="..\Classes\Battle\Events\FDEvent.hpp" />
+    <ClInclude Include="..\Classes\Battle\Ground.hpp" />
+    <ClInclude Include="..\Classes\Battle\MessageLayer.hpp" />
+    <ClInclude Include="..\Classes\Battle\TouchHandler.hpp" />
+    <ClInclude Include="..\Classes\Common\CallbackMethod.hpp" />
+    <ClInclude Include="..\Classes\Common\CommonHelper.hpp" />
+    <ClInclude Include="..\Classes\Common\Constants.hpp" />
+    <ClInclude Include="..\Classes\Common\FDNumber.hpp" />
+    <ClInclude Include="..\Classes\Common\FDPoint.hpp" />
+    <ClInclude Include="..\Classes\Common\FDRandom.hpp" />
+    <ClInclude Include="..\Classes\Common\FDRange.hpp" />
+    <ClInclude Include="..\Classes\Common\PointMap.hpp" />
+    <ClInclude Include="..\Classes\Common\ResourceManager.hpp" />
+    <ClInclude Include="..\Classes\Common\StringUtil.hpp" />
+    <ClInclude Include="..\Classes\Common\TextFileReader.hpp" />
+    <ClInclude Include="..\Classes\Common\utf8.h" />
+    <ClInclude Include="..\Classes\Common\utf8\checked.h" />
+    <ClInclude Include="..\Classes\Common\utf8\core.h" />
+    <ClInclude Include="..\Classes\Common\utf8\unchecked.h" />
+    <ClInclude Include="..\Classes\Controls\ScaledSprite.hpp" />
+    <ClInclude Include="..\Classes\Controls\TouchableLabel.hpp" />
+    <ClInclude Include="..\Classes\Controls\TouchableSprite.hpp" />
+    <ClInclude Include="..\Classes\Data\CreatureDefinition.hpp" />
+    <ClInclude Include="..\Classes\Data\DataStore.hpp" />
+    <ClInclude Include="..\Classes\Data\FightAnimationDefinition.hpp" />
+    <ClInclude Include="..\Classes\Data\FightFrameDefinition.hpp" />
+    <ClInclude Include="..\Classes\Data\Item\AttackItemDefinition.hpp" />
+    <ClInclude Include="..\Classes\Data\Item\DefendItemDefinition.hpp" />
+    <ClInclude Include="..\Classes\Data\Item\ItemDefinition.hpp" />
+    <ClInclude Include="..\Classes\Data\Item\MoneyItemDefinition.hpp" />
+    <ClInclude Include="..\Classes\Data\Item\SpecialItemDefinition.hpp" />
+    <ClInclude Include="..\Classes\Data\Item\UsableItemDefinition.hpp" />
+    <ClInclude Include="..\Classes\Data\LevelUpDefinition.hpp" />
+    <ClInclude Include="..\Classes\Data\LevelUpMagicDefinition.hpp" />
+    <ClInclude Include="..\Classes\Data\LocalizedStrings.hpp" />
+    <ClInclude Include="..\Classes\Data\MagicAnimationDefinition.hpp" />
+    <ClInclude Include="..\Classes\Data\MagicDefinition.hpp" />
+    <ClInclude Include="..\Classes\Data\OccupationDefinition.hpp" />
+    <ClInclude Include="..\Classes\Data\ShopDefinition.hpp" />
+    <ClInclude Include="..\Classes\Data\TransferDefinition.hpp" />
+    <ClInclude Include="..\Classes\Data\TransfersDefinition.hpp" />
+    <ClInclude Include="..\Classes\Dispatchers\ActionMenuState.hpp" />
+    <ClInclude Include="..\Classes\Dispatchers\ActionState.hpp" />
+    <ClInclude Include="..\Classes\Dispatchers\ExchangeItemTargetState.hpp" />
+    <ClInclude Include="..\Classes\Dispatchers\IdleState.hpp" />
+    <ClInclude Include="..\Classes\Dispatchers\ItemMenuState.hpp" />
+    <ClInclude Include="..\Classes\Dispatchers\RecordMenuState.hpp" />
+    <ClInclude Include="..\Classes\Dispatchers\SelectAttackTargetState.hpp" />
+    <ClInclude Include="..\Classes\Dispatchers\SelectItemTargetState.hpp" />
+    <ClInclude Include="..\Classes\Dispatchers\SelectMagicTargetState.hpp" />
+    <ClInclude Include="..\Classes\Dispatchers\SettingsMenuState.hpp" />
+    <ClInclude Include="..\Classes\Dispatchers\ShowMoveScopeState.hpp" />
+    <ClInclude Include="..\Classes\Dispatchers\StateDispatcher.hpp" />
+    <ClInclude Include="..\Classes\Dispatchers\StateSession.hpp" />
+    <ClInclude Include="..\Classes\Dispatchers\SystemMenuState.hpp" />
+    <ClInclude Include="..\Classes\Fight\CounterInfo.hpp" />
+    <ClInclude Include="..\Classes\Fight\CounterScene.hpp" />
+    <ClInclude Include="..\Classes\Fight\FightScene.hpp" />
+    <ClInclude Include="..\Classes\Fight\MagicScene.hpp" />
+    <ClInclude Include="..\Classes\HelloWorldScene.h" />
+    <ClInclude Include="..\Classes\Messages\CompositeBox.hpp" />
+    <ClInclude Include="..\Classes\Messages\ConfirmMessage.hpp" />
+    <ClInclude Include="..\Classes\Messages\ConversationMessage.hpp" />
+    <ClInclude Include="..\Classes\Messages\CreatureInfoMessage.hpp" />
+    <ClInclude Include="..\Classes\Messages\DatoBar.hpp" />
+    <ClInclude Include="..\Classes\Messages\DetailBar.hpp" />
+    <ClInclude Include="..\Classes\Messages\ItemBox.hpp" />
+    <ClInclude Include="..\Classes\Messages\MagicBox.hpp" />
+    <ClInclude Include="..\Classes\Messages\Message.hpp" />
+    <ClInclude Include="..\Classes\Messages\SelectableBox.hpp" />
+    <ClInclude Include="..\Classes\Messages\SpeakMessage.hpp" />
+    <ClInclude Include="..\Classes\Messages\TalkMessage.hpp" />
+    <ClInclude Include="..\Classes\Messages\VillageLabel.hpp" />
+    <ClInclude Include="..\Classes\Objects\AICreature.hpp" />
+    <ClInclude Include="..\Classes\Objects\BattleObject.hpp" />
+    <ClInclude Include="..\Classes\Objects\Creature.hpp" />
+    <ClInclude Include="..\Classes\Objects\CreatureData.hpp" />
+    <ClInclude Include="..\Classes\Objects\Cursor.hpp" />
+    <ClInclude Include="..\Classes\Objects\Enemy.hpp" />
+    <ClInclude Include="..\Classes\Objects\Friend.hpp" />
+    <ClInclude Include="..\Classes\Objects\MenuCursor.hpp" />
+    <ClInclude Include="..\Classes\Objects\Npc.hpp" />
+    <ClInclude Include="..\Classes\Objects\RoutePoint.hpp" />
+    <ClInclude Include="..\Classes\Objects\ScopeIndicator.hpp" />
+    <ClInclude Include="..\Classes\Objects\Treasure.hpp" />
+    <ClInclude Include="..\Classes\Records\BattleRecord.hpp" />
+    <ClInclude Include="..\Classes\Records\ChapterRecord.hpp" />
+    <ClInclude Include="..\Classes\Records\CreatureChapterRecord.hpp" />
+    <ClInclude Include="..\Classes\Records\CreatureRecord.hpp" />
+    <ClInclude Include="..\Classes\Scenes\FDScreen.hpp" />
+    <ClInclude Include="..\Classes\Scenes\GameOverLayer.hpp" />
+    <ClInclude Include="..\Classes\Scenes\LoadingLayer.hpp" />
+    <ClInclude Include="..\Classes\Scenes\SceneCreator.hpp" />
+    <ClInclude Include="..\Classes\Scenes\ShoppingLayer.hpp" />
+    <ClInclude Include="..\Classes\Scenes\TitleLayer.hpp" />
+    <ClInclude Include="..\Classes\Scenes\VillageLayer.hpp" />
+    <ClInclude Include="..\Classes\Scenes\VillageNormalLayer.hpp" />
+    <ClInclude Include="..\Classes\Scenes\VillageVacuumLayer.hpp" />
+    <ClInclude Include="..\Classes\Shopping\ActiveDialog\PagedDialog\ShoppingPagedDialog.hpp" />
+    <ClInclude Include="..\Classes\Shopping\ActiveDialog\PagedDialog\ShoppingSelectAmorTargetDialog.hpp" />
+    <ClInclude Include="..\Classes\Shopping\ActiveDialog\PagedDialog\ShoppingShowFriendsDialog.hpp" />
+    <ClInclude Include="..\Classes\Shopping\ActiveDialog\PagedDialog\ShoppingShowItemsDialog.hpp" />
+    <ClInclude Include="..\Classes\Shopping\ActiveDialog\PagedDialog\ShoppingShowTransferDialog.hpp" />
+    <ClInclude Include="..\Classes\Shopping\ActiveDialog\ShoppingActiveDialog.hpp" />
+    <ClInclude Include="..\Classes\Shopping\ActiveDialog\ShoppingConfirmDialog.hpp" />
+    <ClInclude Include="..\Classes\Shopping\ActiveDialog\ShoppingMessageDialog.hpp" />
+    <ClInclude Include="..\Classes\Shopping\ActiveDialog\ShoppingRecordDialog.hpp" />
+    <ClInclude Include="..\Classes\Shopping\HomeDialog\ShoppingAmorDialog.hpp" />
+    <ClInclude Include="..\Classes\Shopping\HomeDialog\ShoppingBarDialog.hpp" />
+    <ClInclude Include="..\Classes\Shopping\HomeDialog\ShoppingChurchDialog.hpp" />
+    <ClInclude Include="..\Classes\Shopping\HomeDialog\ShoppingHomeDialog.hpp" />
+    <ClInclude Include="..\Classes\Shopping\HomeDialog\ShoppingItemDialog.hpp" />
+    <ClInclude Include="..\Classes\Shopping\HomeDialog\ShoppingSecretDialog.hpp" />
+    <ClInclude Include="..\Classes\Shopping\HomeDialog\ShoppingShopDialog.hpp" />
+    <ClInclude Include="..\Classes\Shopping\ShoppingDialog.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\cocos2d\cocos\2d\libcocos2d.vcxproj">

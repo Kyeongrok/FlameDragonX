@@ -67,7 +67,37 @@ void VillageNormalLayer::loadWithRecord(ChapterRecord * record)
     auto touchListener = EventListenerTouchOneByOne::create();
     touchListener->onTouchBegan = CC_CALLBACK_2(VillageNormalLayer::onClicked, this);
     this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(touchListener, this);
-    
+
+    // Keyboard navigation: Left/Right move between 6 positions, Enter/Space confirms
+    auto kbListener = EventListenerKeyboard::create();
+    kbListener->onKeyPressed = [this](EventKeyboard::KeyCode code, Event*) {
+        if (_confirmExitMessage != nullptr) return;
+        switch (code) {
+            case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
+            case EventKeyboard::KeyCode::KEY_UP_ARROW: {
+                int next = (_cursorPositionIndex - 1 + 6) % 6;
+                this->setCursorPositionIndex(next);
+                break;
+            }
+            case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
+            case EventKeyboard::KeyCode::KEY_DOWN_ARROW: {
+                int next = (_cursorPositionIndex + 1) % 6;
+                this->setCursorPositionIndex(next);
+                break;
+            }
+            case EventKeyboard::KeyCode::KEY_ENTER:
+            case EventKeyboard::KeyCode::KEY_KP_ENTER:
+            case EventKeyboard::KeyCode::KEY_SPACE:
+                if (_cursorPositionIndex > 0) this->enterShop();
+                else this->promptExit();
+                break;
+            case EventKeyboard::KeyCode::KEY_ESCAPE:
+                this->promptExit();
+                break;
+            default: break;
+        }
+    };
+    this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(kbListener, this);
 }
 
 void VillageNormalLayer::takeDeltaTimeTck(float dt)
