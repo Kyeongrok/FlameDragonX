@@ -115,6 +115,28 @@ bool TitleLayer::init()
     buttonContinue->setEnabled(false);
     _screen->addToVisible(buttonContinue, Vec2(380, locationY), 1.5f, 10);
 
+    auto settingLabel = Label::createWithTTF("Settings", "fonts/arial.ttf", 12);
+    settingLabel->setAnchorPoint(Vec2(1, 1));
+    settingLabel->setPosition(screen.width - 5, screen.height - 5);
+    settingLabel->setColor(Color3B::WHITE);
+    this->addChild(settingLabel, 100);
+
+    auto settingTouch = EventListenerTouchOneByOne::create();
+    settingTouch->onTouchBegan = [settingLabel](Touch* t, Event*) {
+        Size bb = settingLabel->getContentSize();
+        Vec2 anchor = settingLabel->getAnchorPoint();
+        Vec2 pos = settingLabel->getPosition();
+        Rect world(pos.x - bb.width * anchor.x - 5,
+                   pos.y - bb.height * anchor.y - 5,
+                   bb.width + 10, bb.height + 10);
+        if (world.containsPoint(t->getLocation())) {
+            Director::getInstance()->replaceScene(SceneCreator::createSettingScene());
+            return true;
+        }
+        return false;
+    };
+    this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(settingTouch, this);
+
     std::vector<Button*> menuButtons = { buttonStart, buttonLoad, buttonContinue };
     auto selected = std::make_shared<int>(0);
     auto applySelection = [menuButtons, selected]() {
@@ -153,6 +175,9 @@ bool TitleLayer::init()
                 break;
             case EventKeyboard::KeyCode::KEY_ESCAPE:
                 Director::getInstance()->end();
+                break;
+            case EventKeyboard::KeyCode::KEY_S:
+                Director::getInstance()->replaceScene(SceneCreator::createSettingScene());
                 break;
             default: break;
         }

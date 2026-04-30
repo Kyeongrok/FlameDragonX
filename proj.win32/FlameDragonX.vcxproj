@@ -295,6 +295,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Scenes\GameOverLayer.cpp" />
     <ClCompile Include="..\Classes\Scenes\LoadingLayer.cpp" />
     <ClCompile Include="..\Classes\Scenes\SceneCreator.cpp" />
+    <ClCompile Include="..\Classes\Scenes\SettingLayer.cpp" />
     <ClCompile Include="..\Classes\Scenes\ShoppingLayer.cpp" />
     <ClCompile Include="..\Classes\Scenes\TitleLayer.cpp" />
     <ClCompile Include="..\Classes\Scenes\VillageLayer.cpp" />
@@ -475,6 +476,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Scenes\GameOverLayer.hpp" />
     <ClInclude Include="..\Classes\Scenes\LoadingLayer.hpp" />
     <ClInclude Include="..\Classes\Scenes\SceneCreator.hpp" />
+    <ClInclude Include="..\Classes\Scenes\SettingLayer.hpp" />
     <ClInclude Include="..\Classes\Scenes\ShoppingLayer.hpp" />
     <ClInclude Include="..\Classes\Scenes\TitleLayer.hpp" />
     <ClInclude Include="..\Classes\Scenes\VillageLayer.hpp" />

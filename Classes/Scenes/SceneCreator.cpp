@@ -16,8 +16,17 @@
 #include "VillageVacuumLayer.hpp"
 #include "LoadingLayer.hpp"
 #include "ShoppingLayer.hpp"
+#include "SettingLayer.hpp"
 
 USING_NS_CC;
+
+Scene* SceneCreator::createSettingScene()
+{
+    auto scene = Scene::create();
+    auto layer = SettingLayer::create();
+    scene->addChild(layer);
+    return scene;
+}
 
 Scene* SceneCreator::createTitleScene()
 {

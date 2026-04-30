@@ -15,25 +15,29 @@
 #include "BatchActivity.hpp"
 #include "CreatureMoveActivity.hpp"
 #include "DurationActivity.hpp"
+#include "SettingLayer.hpp"
 
 void EventChapter1::loadEvents()
 {
-    this->loadTurnEvent(1, CreatureType_Friend, CALLBACK0_SELECTOR(EventChapter1::test));
+    bool storyEnabled = cocos2d::UserDefault::getInstance()->getBoolForKey(SettingLayer::KEY_STORY_ENABLED, false);
+
+    if (storyEnabled) {
+        this->loadTurnEvent(1, CreatureType_Friend, CALLBACK0_SELECTOR(EventChapter1::round1));
+        this->loadTurnEvent(3, CreatureType_Friend, CALLBACK0_SELECTOR(EventChapter1::round3));
+        this->loadTurnEvent(4, CreatureType_Friend, CALLBACK0_SELECTOR(EventChapter1::round4));
+        this->loadTurnEvent(5, CreatureType_Friend, CALLBACK0_SELECTOR(EventChapter1::round5_Boss));
+        this->loadTurnEvent(6, CreatureType_Friend, CALLBACK0_SELECTOR(EventChapter1::round6_Npc));
+
+        this->loadDieEvent(1, CALLBACK0_SELECTOR(EventLoader::gameOver));
+        this->loadDieEvent(5, CALLBACK0_SELECTOR(EventChapter1::hanuoDie));
+        this->loadDieEvent(6, CALLBACK0_SELECTOR(EventChapter1::hawateDie));
+
+        this->loadDyingEvent(29, CALLBACK0_SELECTOR(EventChapter1::bossDying));
+    } else {
+        this->loadTurnEvent(1, CreatureType_Friend, CALLBACK0_SELECTOR(EventChapter1::test));
+    }
+
     this->loadTeamEvent(CreatureType_Enemy, CALLBACK0_SELECTOR(EventChapter1::enemyClear));
-    
-    /*
-    this->loadTurnEvent(3, CreatureType_Friend, CALLBACK0_SELECTOR(EventChapter1::round3));
-    this->loadTurnEvent(4, CreatureType_Friend, CALLBACK0_SELECTOR(EventChapter1::round4));
-    this->loadTurnEvent(5, CreatureType_Friend, CALLBACK0_SELECTOR(EventChapter1::round5_Boss));
-    this->loadTurnEvent(6, CreatureType_Friend, CALLBACK0_SELECTOR(EventChapter1::round6_Npc));
-    
-    this->loadDieEvent(1, CALLBACK0_SELECTOR(EventLoader::gameOver));
-    this->loadDieEvent(5, CALLBACK0_SELECTOR(EventChapter1::hanuoDie));
-    this->loadDieEvent(6, CALLBACK0_SELECTOR(EventChapter1::hawateDie));
-    
-    this->loadDyingEvent(29, CALLBACK0_SELECTOR(EventChapter1::bossDying));
-    this->loadTeamEvent(CreatureType_Enemy, CALLBACK0_SELECTOR(EventChapter1::enemyClear));
-     */
 }
 
 void EventChapter1::test()

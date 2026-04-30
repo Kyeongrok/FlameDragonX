@@ -20,12 +20,26 @@ MessageLayer::MessageLayer(BattleScene * scene)
     _listener->onTouchCancelled = CC_CALLBACK_2(MessageLayer::onTouchCancelled, this);
     
     this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(_listener, this);
-    
+
     _listener->setEnabled(false);
     _listener->setSwallowTouches(true);
     _activeMessage = nullptr;
-    
+
     _activityQueue = new ActivityQueue();
+
+    auto kbListener = EventListenerKeyboard::create();
+    kbListener->onKeyPressed = [this](EventKeyboard::KeyCode code, Event*) {
+        if (_activeMessage == nullptr) return;
+        switch (code) {
+            case EventKeyboard::KeyCode::KEY_ENTER:
+            case EventKeyboard::KeyCode::KEY_KP_ENTER:
+            case EventKeyboard::KeyCode::KEY_SPACE:
+                _activeMessage->handleClick(Vec2::ZERO);
+                break;
+            default: break;
+        }
+    };
+    this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(kbListener, this);
 }
 
 

@@ -128,8 +128,8 @@ void BattleField::initWithChapter(int chapterId)
         switch (code) {
             case EventKeyboard::KeyCode::KEY_LEFT_ARROW:  target.x -= 1; break;
             case EventKeyboard::KeyCode::KEY_RIGHT_ARROW: target.x += 1; break;
-            case EventKeyboard::KeyCode::KEY_UP_ARROW:    target.y += 1; break;
-            case EventKeyboard::KeyCode::KEY_DOWN_ARROW:  target.y -= 1; break;
+            case EventKeyboard::KeyCode::KEY_UP_ARROW:    target.y -= 1; break;
+            case EventKeyboard::KeyCode::KEY_DOWN_ARROW:  target.y += 1; break;
             case EventKeyboard::KeyCode::KEY_ENTER:
             case EventKeyboard::KeyCode::KEY_KP_ENTER:
             case EventKeyboard::KeyCode::KEY_SPACE:

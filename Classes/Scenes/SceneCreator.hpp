@@ -26,7 +26,8 @@ public:
     static Scene* createPickFriendScene(ChapterRecord * chapterRecord);
     static Scene* createLoadingScene();
     static Scene* createShoppingScene(ChapterRecord * chapterRecord, ShopType type);
-    
+    static Scene* createSettingScene();
+
 };
 
 #endif /* TitleScene_h */

@@ -8,6 +8,7 @@
 
 #include "ConversationMessage.hpp"
 #include "MessageLayer.hpp"
+#include "SettingLayer.hpp"
 
 
 /*
@@ -126,7 +127,9 @@ void ConversationMessage::buildBaseDialog(Vec2 screenPosition)
     dato->setAnchorPoint(Vec2(0, 0));
     _messageBox->addChild(dato, Vec2(3, 3));
     
-    auto label = Label::createWithTTF(_content.c_str(), "fonts/mini_black.ttf", 14);
+    int fontSize = UserDefault::getInstance()->getIntegerForKey(SettingLayer::KEY_DIALOG_FONT_SIZE, 14);
+    auto label = Label::createWithTTF(_content.c_str(), "fonts/malgun.ttf", fontSize);
+    label->setMaxLineWidth(380);
     label->setColor(Color3B(255, 255, 255));
     label->setAnchorPoint(Vec2(0, 0.5f));
     _messageBox->addLabel(label, Vec2(80, 60));

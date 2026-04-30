@@ -9,45 +9,45 @@
     <key>Condition-Win</key><string>敌全灭</string>
 
     <key>01-01-001-Id</key><string>1</string>
-    <key>01-01-001</key><string>累死了，大家休息一下吧！</string>
+    <key>01-01-001</key><string>아, 지쳐 죽겠다. 다들 좀 쉬자!</string>
     <key>01-01-002-Id</key><string>3</string>
-    <key>01-01-002</key><string>听说再越过这片海洋就到马拉大陆了，我们先在此休息一会儿，等海水涨潮适合我们上岸的时候船夫就会来接我们。</string>
+    <key>01-01-002</key><string>이 바다만 건너면 마라 대륙이래. 일단 여기서 잠시 쉬자고. 만조가 되어 상륙할 수 있게 되면 뱃사공이 우리를 데리러 올 거야.</string>
     <key>01-01-003-Id</key><string>1</string>
-    <key>01-01-003</key><string>好极了。#悠妮，你。。。恩，坐了这么久的船，有点累吧？</string>
+    <key>01-01-003</key><string>잘됐다. #유니, 너… 음, 배를 그렇게 오래 탔으니 좀 피곤하지?</string>
     <key>01-01-004-Id</key><string>2</string>
-    <key>01-01-004</key><string>恩，还好。海风吹起来真舒服阿。。。</string>
+    <key>01-01-004</key><string>응, 괜찮아. 바닷바람이 정말 시원해…</string>
     <key>01-01-005-Id</key><string>4</string>
-    <key>01-01-005</key><string>。。。！！！</string>
+    <key>01-01-005</key><string>…!!!</string>
 
     <key>01-01-006-Id</key><string>11</string>
-    <key>01-01-006</key><string>瞧，竟有呆鸟在这小岛上休息，真是天上掉下来的肥肉。</string>
+    <key>01-01-006</key><string>이봐, 이 작은 섬에 얼간이들이 쉬고 있잖아. 그야말로 굴러들어온 횡재로군.</string>
     <key>01-01-007-Id</key><string>14</string>
-    <key>01-01-007</key><string>就是说嘛！俺去通报老大支援，你们赶快把这些小子摆平。</string>
+    <key>01-01-007</key><string>그러게 말이야! 난 두목한테 지원 요청하러 갈 테니, 너흰 얼른 저놈들을 처리해.</string>
 
     <key>01-01-008-Id</key><string>1</string>
-    <key>01-01-008</key><string>亚雷斯，那群家伙在那里鬼叫什么？</string>
+    <key>01-01-008</key><string>아레스, 저 녀석들 뭐라고 떠드는 거야?</string>
     <key>01-01-009-Id</key><string>3</string>
-    <key>01-01-009</key><string>恩。。。嘿，好像是船夫提到过的海盗耶！</string>
+    <key>01-01-009</key><string>음… 어, 뱃사공이 말했던 그 해적들인 것 같은데!</string>
     <key>01-01-010-Id</key><string>1</string>
-    <key>01-01-010</key><string>海盗？是要来抢劫我们的吗？</string>
+    <key>01-01-010</key><string>해적? 우리를 털러 온 거야?</string>
     <key>01-01-011-Id</key><string>3</string>
-    <key>01-01-011</key><string>岂止抢劫而已，听说这批海盗横行马拉大陆沿海，杀人越货无所不为。</string>
+    <key>01-01-011</key><string>약탈만 하는 게 아냐. 이놈들이 마라 대륙 연안을 휘젓고 다니며 살인에 강도질까지 안 하는 짓이 없대.</string>
     <key>01-01-012-Id</key><string>1</string>
-    <key>01-01-012</key><string>什么，要打架我奉陪，要抢劫嘛，门也没有。亚雷斯，好久没活动活动筋骨了，你没问题吧！</string>
+    <key>01-01-012</key><string>뭐, 싸움이라면 응해주지. 강도질은 어림도 없어. 아레스, 오랜만에 몸 좀 풀어보자고. 괜찮지?</string>
     <key>01-01-013-Id</key><string>3</string>
-    <key>01-01-013</key><string>岂止没问题，我手痒难熬，都快受不了啦！</string>
+    <key>01-01-013</key><string>괜찮은 정도가 아니라 손이 근질거려서 견딜 수가 없다고!</string>
     <key>01-01-014-Id</key><string>11</string>
-    <key>01-01-014</key><string>喂，小子们，乖乖的把身上的钱财和那个漂亮小妞交出来，我们就在老大面前说说好话保你们一命！不然。。。</string>
+    <key>01-01-014</key><string>야, 꼬맹이들. 몸에 지닌 돈하고 저 예쁜 아가씨 얌전히 내놓으면 두목한테 잘 말해서 목숨은 살려주마! 안 그러면…</string>
     <key>01-01-015-Id</key><string>2</string>
-    <key>01-01-015</key><string>什么是漂亮小妞？是指我吗？</string>
+    <key>01-01-015</key><string>예쁜 아가씨가 뭐야? 나 말하는 거야?</string>
     <key>01-01-016-Id</key><string>3</string>
-    <key>01-01-016</key><string>不是啦，那是。。。</string>
+    <key>01-01-016</key><string>아, 아냐, 그건…</string>
     <key>01-01-017-Id</key><string>1</string>
-    <key>01-01-017</key><string>可恶，你们这些乱说话的海盗，我要把你们全宰了！</string>
+    <key>01-01-017</key><string>이런, 헛소리하는 해적 놈들, 다 베어버리겠다!</string>
     <key>01-01-018-Id</key><string>11</string>
-    <key>01-01-018</key><string>啊呀，看来他们想抵抗呢！</string>
+    <key>01-01-018</key><string>어이쿠, 이놈들 저항할 생각인가 본데!</string>
     <key>01-01-019-Id</key><string>12</string>
-    <key>01-01-019</key><string>那就杀无赦，上啊！</string>
+    <key>01-01-019</key><string>그럼 가차없이 죽여라, 가자!</string>
 
     <key>01-02-001-Id</key><string>5</string>
     <key>01-02-001</key><string>老爸！老爸！</string>
