@@ -38,10 +38,10 @@ typedef union
 #ifndef __PHYSICS_COMMON_H__
 #ifndef PFX_USE_FREE_VECTORMATH
 #ifndef __BT_SKIP_UINT64_H
-#if defined(_WIN64) && defined(_MSC_VER)
-		typedef unsigned __int64 uint64_t;
+#if defined(_MSC_VER)
+#include <stdint.h>
 #elif defined(_M_ARM)
-        typedef unsigned __int64 uint64_t;
+		typedef unsigned __int64 uint64_t;
 #else
 		typedef unsigned long int uint64_t;
 #endif

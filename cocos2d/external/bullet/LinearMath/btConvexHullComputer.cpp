@@ -19,13 +19,10 @@ subject to the following restrictions:
 #include "btMinMax.h"
 #include "btVector3.h"
 
-#ifdef __GNUC__
+#ifdef _MSC_VER
 	#include <stdint.h>
-#elif defined(_MSC_VER)
-	typedef __int32 int32_t;
-	typedef __int64 int64_t;
-	typedef unsigned __int32 uint32_t;
-	typedef unsigned __int64 uint64_t;
+#elif defined(__GNUC__)
+	#include <stdint.h>
 #else
 	typedef int int32_t;
 	typedef long long int int64_t;

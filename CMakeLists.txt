@@ -107,6 +107,10 @@ elseif(ANDROID)
     )
 endif()
 
+if(MSVC)
+  add_compile_options(/FS)
+endif()
+
 include_directories(
   /usr/local/include/GLFW
   /usr/include/GLFW
@@ -114,6 +118,30 @@ include_directories(
   ${COCOS2D_ROOT}/cocos/platform
   ${COCOS2D_ROOT}/cocos/audio/include/
   Classes
+  Classes/Actions
+  Classes/Activities
+  Classes/Algorithms
+  Classes/Animation
+  Classes/Battle
+  Classes/Battle/AI
+  Classes/Battle/Events
+  Classes/Battle/Events/Chapter
+  Classes/Battle/Events/Condition
+  Classes/Common
+  Classes/Common/utf8
+  Classes/Controls
+  Classes/Data
+  Classes/Data/Item
+  Classes/Dispatchers
+  Classes/Fight
+  Classes/Messages
+  Classes/Objects
+  Classes/Records
+  Classes/Scenes
+  Classes/Shopping
+  Classes/Shopping/ActiveDialog
+  Classes/Shopping/ActiveDialog/PagedDialog
+  Classes/Shopping/HomeDialog
 )
 if ( WIN32 )
   include_directories(
@@ -122,15 +150,20 @@ if ( WIN32 )
 )
 endif( WIN32 )
 
+file(GLOB_RECURSE GAME_SRC_ALL
+  Classes/*.cpp
+)
 set(GAME_SRC
-  Classes/AppDelegate.cpp
-  Classes/HelloWorldScene.cpp
+  ${GAME_SRC_ALL}
   ${PLATFORM_SPECIFIC_SRC}
 )
 
+file(GLOB_RECURSE GAME_HEADERS_ALL
+  Classes/*.h
+  Classes/*.hpp
+)
 set(GAME_HEADERS
-  Classes/AppDelegate.h
-  Classes/HelloWorldScene.h
+  ${GAME_HEADERS_ALL}
   ${PLATFORM_SPECIFIC_HEADERS}
 )
 

@@ -30,6 +30,7 @@
 
 #include <string>
 #include <condition_variable>
+#include <functional>
 #include <thread>
 #ifdef OPENAL_PLAIN_INCLUDES
 #include <al.h>

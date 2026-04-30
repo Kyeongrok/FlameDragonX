@@ -7,6 +7,7 @@
 //
 
 #include "FightAnimationDefinition.hpp"
+#include <vector>
 
 FightAnimationDefinition::FightAnimationDefinition(int animationId, FightAnimationType type)
 {
@@ -18,7 +19,7 @@ FightAnimationDefinition::FightAnimationDefinition(int animationId, FightAnimati
 void FightAnimationDefinition::readFromFile(TextFileReader * reader)
 {
     int frameCount = reader->readInt();
-    int hitArray[frameCount];
+    std::vector<int> hitArray(frameCount);
     int remoteFrameIndex = 0;
     
     if (_type == FightAnimationType_Attack)

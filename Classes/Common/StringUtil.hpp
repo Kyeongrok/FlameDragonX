@@ -9,6 +9,7 @@
 #ifndef StringUtil_hpp
 #define StringUtil_hpp
 
+#include <vector>
 #include "cocos2d.h"
 USING_NS_CC;
 
@@ -24,10 +25,10 @@ public:
         // See comments: the +1 is necessary, while the first parameter
         //               can also be set to nullptr
         
-        char bytes[required];
-        std::snprintf(bytes, required, fmt.c_str(), vs...);
-        
-        return std::string(bytes);
+        std::vector<char> bytes(required);
+        std::snprintf(bytes.data(), required, fmt.c_str(), vs...);
+
+        return std::string(bytes.data());
     }
 };
 #endif /* StringUtil_hpp */
