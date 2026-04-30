@@ -1,0 +1,39 @@
+# Build output
+**/Debug.win32/
+**/Release.win32/
+proj.win32/*.user
+proj.win32/.vs/
+*.obj
+*.pdb
+*.ilk
+*.exp
+*.log
+build_win32.log
+run_with_log.bat
+
+# Cocos2d-x prebuilt downloads (re-fetched by download-deps.py)
+cocos2d/external/Box2D/prebuilt/
+cocos2d/external/bullet/prebuilt/
+cocos2d/external/chipmunk/prebuilt/
+cocos2d/external/curl/prebuilt/
+cocos2d/external/freetype2/prebuilt/
+cocos2d/external/glfw3/prebuilt/
+cocos2d/external/jpeg/prebuilt/
+cocos2d/external/png/prebuilt/
+cocos2d/external/recast/prebuilt/
+cocos2d/external/tiff/prebuilt/
+cocos2d/external/webp/prebuilt/
+cocos2d/external/websockets/prebuilt/
+cocos2d/external/win32-specific/*/prebuilt/
+
+# IDE
+.vs/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backup
+*.bak

@@ -1,0 +1,72 @@
+name: Build & Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Download Cocos2d-x prebuilt deps
+        working-directory: cocos2d
+        shell: cmd
+        run: python download-deps.py -r yes
+
+      - name: Build (Release | Win32)
+        working-directory: proj.win32
+        shell: pwsh
+        run: |
+          msbuild FlameDragonX.sln `
+            /t:FlameDragonX `
+            /p:Configuration=Release `
+            /p:Platform=Win32 `
+            /p:PlatformToolset=v143 `
+            /m /v:minimal /nologo
+
+      - name: Package artifact
+        shell: pwsh
+        run: |
+          $tag = "${{ github.ref_name }}"
+          if ([string]::IsNullOrEmpty($tag) -or $tag -eq "main" -or $tag -eq "master") {
+              $tag = "build-$(Get-Date -Format yyyyMMdd-HHmmss)"
+          }
+          $name = "FlameDragonX-$tag"
+          $src  = "proj.win32/Release.win32"
+          if (-not (Test-Path $src)) {
+              throw "Build output folder not found: $src"
+          }
+          Compress-Archive -Path "$src/*" -DestinationPath "$name.zip" -Force
+          Get-ChildItem "$name.zip"
+
+      - name: Upload artifact (manual run)
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@v4
+        with:
+          name: FlameDragonX-build
+          path: FlameDragonX-*.zip
+          retention-days: 30
+
+      - name: Create Release (tag push)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: FlameDragonX-*.zip
+          generate_release_notes: true
