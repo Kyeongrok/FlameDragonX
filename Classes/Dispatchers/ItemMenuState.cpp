@@ -46,7 +46,7 @@ void ItemMenuState::onExitState()
 void ItemMenuState::handleClickAt(Vec2 position)
 {
     MenuCursor * menuItem = (MenuCursor *)_battleField->getObjectByPosition(BattleObject_Menu, position);
-    
+
     if (menuItem == nullptr)
     {
         _battleField->closeMenu(true);
@@ -159,10 +159,16 @@ void ItemMenuState::selectItemToDrop()
 void ItemMenuState::confirmItemToDrop(int itemIndex)
 {
     this->onEnterState();
-    
+
     if (itemIndex >= 0) {
-        
+
         // Drop Item
         _creature->creatureData()->removeItem(itemIndex);
     }
+}
+
+void ItemMenuState::handleCancel()
+{
+    _battleField->closeMenu(true);
+    _nextState = ActionMenuState::create(_battleScene, _session);
 }

@@ -106,6 +106,11 @@ void SelectItemTargetState::handleClickAt(Vec2 position)
     }
 }
 
+void SelectItemTargetState::handleCancel()
+{
+    _nextState = ItemMenuState::create(_battleScene, _session);
+}
+
 bool SelectItemTargetState::canApplyOnCreature(ItemDefinition * item, Creature * target)
 {
     if (item->getDefinitionId() == 119) {

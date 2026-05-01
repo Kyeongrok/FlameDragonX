@@ -97,3 +97,8 @@ void SelectAttackTargetState::handleClickAt(Vec2 position)
         return;
     }
 }
+
+void SelectAttackTargetState::handleCancel()
+{
+    _nextState = ActionMenuState::create(_battleScene, _session);
+}

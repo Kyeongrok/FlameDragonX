@@ -147,3 +147,8 @@ void ExchangeItemTargetState::confirmItemToExchangeBack(int exchangeItemIndex)
     _battleField->notifyStateDispatcher();
 
 }
+
+void ExchangeItemTargetState::handleCancel()
+{
+    _nextState = ItemMenuState::create(_battleScene, _session);
+}

@@ -107,3 +107,8 @@ void SelectMagicTargetState::handleClickAt(Vec2 position)
         return;
     }
 }
+
+void SelectMagicTargetState::handleCancel()
+{
+    _nextState = ActionMenuState::create(_battleScene, _session);
+}
