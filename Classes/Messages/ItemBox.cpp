@@ -47,7 +47,7 @@ ItemBox::ItemBox(Creature * creature, MessageBoxOperatingType type, Ref* caller,
         _baseSprite->addChild(iconSprite, Vec2(locationX - 20, locationY));
         
         // Name
-        TouchableLabel * nameLabel = TouchableLabel::createWithTTF(item->getName(), "fonts/mini_black.ttf", 14);
+        TouchableLabel * nameLabel = TouchableLabel::createWithTTF(item->getName(), "fonts/malgun.ttf", 14);
         nameLabel->setAnchorPoint(Vec2(0, 0));
         nameLabel->setTag(i);
         if (this->isSelectable(item)) {

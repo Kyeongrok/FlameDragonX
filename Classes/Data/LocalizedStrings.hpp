@@ -16,7 +16,7 @@ USING_NS_CC;
 class LocalizedStrings : public Ref
 {
 private:
-    
+
     static LocalizedStrings * _instance;
 
     Dictionary * _creatureNames;
@@ -26,16 +26,21 @@ private:
     Dictionary * _occupations;
     Dictionary * _races;
     Dictionary * _villageShops;
-    
+
     Dictionary * _chapterStrings;
-    
+
+    std::string _languageFolder;
+
 public:
-    
+
+    static const char* KEY_LANGUAGE;
+    static const char* DEFAULT_LANGUAGE;
+
     LocalizedStrings();
     ~LocalizedStrings();
-    
+
     static LocalizedStrings * getInstance();
-    
+
     void loadBasicStrings();
     void loadChapterStrings(int chapterId);
     

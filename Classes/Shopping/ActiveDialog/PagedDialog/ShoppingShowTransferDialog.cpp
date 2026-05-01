@@ -70,7 +70,7 @@ void ShoppingShowTransferDialog::showDialog(ShoppingLayer * layer)
         iconSprite->setAnchorPoint(Vec2(0, 0));
         _baseSprite->addChild(iconSprite, Vec2(startX, startY - intervalY * i));
         
-        TouchableLabel * messageLabel = TouchableLabel::createWithTTF(message, "fonts/mini_black.ttf", 14);
+        TouchableLabel * messageLabel = TouchableLabel::createWithTTF(message, "fonts/malgun.ttf", 14);
         messageLabel->setTag(transfer->transferId());
         messageLabel->setCallback(this, CALLBACK1_SELECTOR(ShoppingShowTransferDialog::onClicked));
         messageLabel->setAnchorPoint(Vec2(0, 0));

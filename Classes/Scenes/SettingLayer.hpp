@@ -19,15 +19,18 @@ private:
     cocos2d::Label * _fontValueLabel;
     cocos2d::Label * _resolutionValueLabel;
     cocos2d::Label * _resolutionHintLabel;
+    cocos2d::Label * _languageValueLabel;
     int _selectedIndex;
 
     void updateStoryLabel();
     void updateFontLabel();
     void updateResolutionLabel();
+    void updateLanguageLabel();
     void updateSelection();
     void toggleStory();
     void cycleFontSize();
     void cycleResolution();
+    void cycleLanguage();
     void backToTitle();
 };
 

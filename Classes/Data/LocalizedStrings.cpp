@@ -10,6 +10,9 @@
 
 USING_NS_CC;
 
+const char* LocalizedStrings::KEY_LANGUAGE = "language";
+const char* LocalizedStrings::DEFAULT_LANGUAGE = "zh-cn";
+
 LocalizedStrings * LocalizedStrings::_instance = nullptr;
 
 LocalizedStrings * LocalizedStrings::getInstance()
@@ -34,18 +37,22 @@ LocalizedStrings::~LocalizedStrings()
 
 void LocalizedStrings::loadBasicStrings()
 {
+    _languageFolder = UserDefault::getInstance()->getStringForKey(KEY_LANGUAGE, DEFAULT_LANGUAGE);
+
     Dictionary *language = Dictionary::createWithContentsOfFile("ch.plist");
 
-    _creatureNames = Dictionary::createWithContentsOfFile("Strings/zh-cn/Creature.strings");
+    std::string base = "Strings/" + _languageFolder + "/";
+
+    _creatureNames = Dictionary::createWithContentsOfFile((base + "Creature.strings").c_str());
     _creatureNames->retain();
-    _itemNames = Dictionary::createWithContentsOfFile("Strings/zh-cn/Item.strings");
+    _itemNames = Dictionary::createWithContentsOfFile((base + "Item.strings").c_str());
     _itemNames->retain();
-    _magicNames = Dictionary::createWithContentsOfFile("Strings/zh-cn/Magic.strings");
+    _magicNames = Dictionary::createWithContentsOfFile((base + "Magic.strings").c_str());
     _magicNames->retain();
-    _occupations = Dictionary::createWithContentsOfFile("Strings/zh-cn/Occupation.strings");
+    _occupations = Dictionary::createWithContentsOfFile((base + "Occupation.strings").c_str());
     _occupations->retain();
-    
-    _messages = Dictionary::createWithContentsOfFile("Strings/zh-cn/Message.strings");
+
+    _messages = Dictionary::createWithContentsOfFile((base + "Message.strings").c_str());
     _messages->retain();
 }
 
@@ -56,8 +63,9 @@ void LocalizedStrings::loadChapterStrings(int chapterId)
     {
         _chapterStrings->release();
     }
-    
-    std::string filename = StringUtils::format("Strings/zh-cn/Maps/Chapter-%02d.strings", chapterId);
+
+    std::string filename = StringUtils::format("Strings/%s/Maps/Chapter-%02d.strings",
+                                               _languageFolder.c_str(), chapterId);
     _chapterStrings = Dictionary::createWithContentsOfFile(filename.c_str());
     _chapterStrings->retain();
 }

@@ -16,7 +16,7 @@ DetailBar::DetailBar(Creature * creature)
     
     // Name and Occupation
     std::string nameOccupation = StringUtils::format("%s  %s", creature->getDefinition()->name.c_str(), creature->getDefinition()->getOccupationName().c_str());
-    Label * nameOccupationLabel = Label::createWithTTF(nameOccupation.c_str(), "fonts/mini_black.ttf", 16);
+    Label * nameOccupationLabel = Label::createWithTTF(nameOccupation.c_str(), "fonts/malgun.ttf", 16);
     nameOccupationLabel->setAnchorPoint(Vec2(0, 0));
     _baseSprite->addLabel(nameOccupationLabel, Vec2(5, 62));
     

@@ -1,6 +1,7 @@
 #include "SettingLayer.hpp"
 #include "SceneCreator.hpp"
 #include "Constants.hpp"
+#include "LocalizedStrings.hpp"
 
 USING_NS_CC;
 
@@ -13,10 +14,12 @@ static const int FONT_SIZE_OPTIONS[] = { 12, 14, 18, 24 };
 static const int FONT_SIZE_COUNT = 4;
 static const int WINDOW_SCALE_OPTIONS[] = { 1, 2, 3, 4 };
 static const int WINDOW_SCALE_COUNT = 4;
-static const int MENU_COUNT = 4;
+static const char* LANGUAGE_OPTIONS[] = { "zh-cn", "ko" };
+static const int LANGUAGE_COUNT = 2;
+static const int MENU_COUNT = 5;
 
 namespace {
-    Label * _menuLabels[MENU_COUNT] = { nullptr, nullptr, nullptr, nullptr };
+    Label * _menuLabels[MENU_COUNT] = { nullptr, nullptr, nullptr, nullptr, nullptr };
 }
 
 bool SettingLayer::init()
@@ -72,14 +75,26 @@ bool SettingLayer::init()
     _resolutionHintLabel->setColor(Color3B(180, 180, 180));
     this->addChild(_resolutionHintLabel);
 
+    auto languageLabel = Label::createWithTTF("Language", FONT, 18);
+    languageLabel->setAnchorPoint(Vec2(0, 0.5f));
+    languageLabel->setPosition(screen.width / 2 - 130, lineY - lineGap * 3 - 20);
+    this->addChild(languageLabel);
+
+    _languageValueLabel = Label::createWithTTF("zh-cn", FONT, 18);
+    _languageValueLabel->setAnchorPoint(Vec2(1, 0.5f));
+    _languageValueLabel->setPosition(screen.width / 2 + 130, lineY - lineGap * 3 - 20);
+    this->addChild(_languageValueLabel);
+    updateLanguageLabel();
+
     auto backLabel = Label::createWithTTF("Back", FONT, 18);
-    backLabel->setPosition(screen.width / 2, lineY - lineGap * 3 - 20);
+    backLabel->setPosition(screen.width / 2, lineY - lineGap * 4 - 30);
     this->addChild(backLabel);
 
     _menuLabels[0] = _storyValueLabel;
     _menuLabels[1] = _fontValueLabel;
     _menuLabels[2] = _resolutionValueLabel;
-    _menuLabels[3] = backLabel;
+    _menuLabels[3] = _languageValueLabel;
+    _menuLabels[4] = backLabel;
     _selectedIndex = 0;
     updateSelection();
 
@@ -99,6 +114,7 @@ bool SettingLayer::init()
                 if (i == 0) toggleStory();
                 else if (i == 1) cycleFontSize();
                 else if (i == 2) cycleResolution();
+                else if (i == 3) cycleLanguage();
                 else backToTitle();
                 return true;
             }
@@ -121,6 +137,7 @@ bool SettingLayer::init()
                 if (_selectedIndex == 0) toggleStory();
                 else if (_selectedIndex == 1) cycleFontSize();
                 else if (_selectedIndex == 2) cycleResolution();
+                else if (_selectedIndex == 3) cycleLanguage();
                 break;
             case EventKeyboard::KeyCode::KEY_ENTER:
             case EventKeyboard::KeyCode::KEY_KP_ENTER:
@@ -128,6 +145,7 @@ bool SettingLayer::init()
                 if (_selectedIndex == 0) toggleStory();
                 else if (_selectedIndex == 1) cycleFontSize();
                 else if (_selectedIndex == 2) cycleResolution();
+                else if (_selectedIndex == 3) cycleLanguage();
                 else backToTitle();
                 break;
             case EventKeyboard::KeyCode::KEY_ESCAPE:
@@ -210,6 +228,27 @@ void SettingLayer::cycleResolution()
     UserDefault::getInstance()->setIntegerForKey(KEY_WINDOW_SCALE, next);
     UserDefault::getInstance()->flush();
     updateResolutionLabel();
+}
+
+void SettingLayer::updateLanguageLabel()
+{
+    std::string current = UserDefault::getInstance()->getStringForKey(
+        LocalizedStrings::KEY_LANGUAGE, LocalizedStrings::DEFAULT_LANGUAGE);
+    _languageValueLabel->setString(current);
+}
+
+void SettingLayer::cycleLanguage()
+{
+    std::string current = UserDefault::getInstance()->getStringForKey(
+        LocalizedStrings::KEY_LANGUAGE, LocalizedStrings::DEFAULT_LANGUAGE);
+    int idx = 0;
+    for (int i = 0; i < LANGUAGE_COUNT; ++i) {
+        if (current == LANGUAGE_OPTIONS[i]) { idx = i; break; }
+    }
+    const char* next = LANGUAGE_OPTIONS[(idx + 1) % LANGUAGE_COUNT];
+    UserDefault::getInstance()->setStringForKey(LocalizedStrings::KEY_LANGUAGE, next);
+    UserDefault::getInstance()->flush();
+    updateLanguageLabel();
 }
 
 void SettingLayer::backToTitle()

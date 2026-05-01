@@ -62,7 +62,7 @@ void ShoppingHomeDialog::setMessage(std::string message)
         _message = nullptr;
     }
     
-    _message = Label::createWithTTF(message.c_str(), "fonts/mini_black.ttf", DEFAULT_FONT_SIZE);
+    _message = Label::createWithTTF(message.c_str(), "fonts/malgun.ttf", DEFAULT_FONT_SIZE);
     _message->setColor(Color3B(255, 255, 255));
     _message->setAnchorPoint(Vec2(0, 0.5f));
     _baseSprite->addLabel(_message, MESSAGE_POSITION);

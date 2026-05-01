@@ -56,7 +56,7 @@ void ShoppingShowFriendsDialog::showDialog(ShoppingLayer * layer)
         _baseSprite->addChild(iconSprite, Vec2(startX + intervalX * (i % 3), startY - intervalY * (i / 3)));
         
         // Name
-        TouchableLabel * nameLabel = TouchableLabel::createWithTTF(def->name, "fonts/mini_black.ttf", 14);
+        TouchableLabel * nameLabel = TouchableLabel::createWithTTF(def->name, "fonts/malgun.ttf", 14);
         nameLabel->setTag(creatureIndex);
         nameLabel->setCallback(this, CALLBACK1_SELECTOR(ShoppingShowFriendsDialog::onClicked));
         nameLabel->setAnchorPoint(Vec2(0, 0));

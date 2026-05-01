@@ -23,7 +23,7 @@ MagicBox::MagicBox(Creature * creature, MessageBoxOperatingType type, Ref* calle
         MagicDefinition * magic = DataStore::getInstance()->getMagicDefinition(magicId);
         
         // Name
-        TouchableLabel * nameLabel = TouchableLabel::createWithTTF(magic->getName(), "fonts/mini_black.ttf", 14);
+        TouchableLabel * nameLabel = TouchableLabel::createWithTTF(magic->getName(), "fonts/malgun.ttf", 14);
         nameLabel->setAnchorPoint(Vec2(0, 0));
         nameLabel->setTag(i);
         

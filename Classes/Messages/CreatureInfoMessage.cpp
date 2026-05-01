@@ -37,7 +37,7 @@ void CreatureInfoMessage::initDialog()
     
     // Name
     std::string name = LocalizedStrings::getInstance()->getCreatureName(_creature->getDefinition()->animationId);
-    auto label = Label::createWithTTF(name.c_str(), "fonts/mini_black.ttf", 16);
+    auto label = Label::createWithTTF(name.c_str(), "fonts/malgun.ttf", 16);
     label->setAnchorPoint(Vec2(0, 0.5f));
     _baseSprite->addLabel(label, Vec2(11, 38));
     

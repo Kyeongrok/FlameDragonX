@@ -19,7 +19,7 @@ void ShoppingConfirmDialog::showDialog(ShoppingLayer * layer)
     ShoppingActiveDialog::showDialog(layer);
     
     // Add message
-    Label * message = Label::createWithTTF(_message.c_str(), "fonts/mini_black.ttf", DEFAULT_FONT_SIZE);
+    Label * message = Label::createWithTTF(_message.c_str(), "fonts/malgun.ttf", DEFAULT_FONT_SIZE);
     message->setAnchorPoint(Vec2(0, 0.5f));
     _baseSprite->addLabel(message, MESSAGE_POSITION);
     
