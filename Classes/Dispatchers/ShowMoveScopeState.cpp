@@ -41,16 +41,20 @@ ShowMoveScopeState::~ShowMoveScopeState()
 
 void ShowMoveScopeState::onEnterState()
 {
+    // Defensive: clear any leftover indicators from a previous selection so we
+    // never end up with multiple creatures' move scopes on screen at once.
+    _battleField->removeAllIndicators();
+
     Vec2 position = _session->creaturePositionBeforeMove;
     Creature * creature = _battleField->getCreatureById(_session->selectedCreatureId());
-    
+
     if (creature == nullptr)
     {
         return;
     }
-    
+
     creature->setMoved(false);
-    
+
     /// creature->setFocus(true);
     _battleField->setObjectPosition(creature, position);
     
@@ -97,7 +101,7 @@ void ShowMoveScopeState::handleClickAt(Vec2 position)
     {
         _session->creaturePositionAfterMove = position;
         Creature * creature = _battleField->getCreatureById(_session->selectedCreatureId());
-        
+
         if (position != _session->creaturePositionBeforeMove)
         {
             creature->setMoved(true);
@@ -109,12 +113,17 @@ void ShowMoveScopeState::handleClickAt(Vec2 position)
         {
             creature->setMoved(false);
         }
-        
+
         _nextState = ActionMenuState::create(_battleScene, _session);
     }
     else
     {
         _nextState = IdleState::create(_battleScene);
     }
-    
+
+}
+
+void ShowMoveScopeState::handleCancel()
+{
+    _nextState = IdleState::create(_battleScene);
 }

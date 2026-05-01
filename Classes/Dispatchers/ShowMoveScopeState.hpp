@@ -33,7 +33,8 @@ public:
     void onExitState();
     
     virtual void handleClickAt(Vec2 position) override;
-    
+    virtual void handleCancel() override;
+
 };
 
 #endif /* ShowMoveScopeState_hpp */

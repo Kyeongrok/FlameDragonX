@@ -54,8 +54,19 @@ void StateDispatcher::handleClickAt(Vec2 position)
     {
         return;
     }
-    
+
     _currentState->handleClickAt(position);
+    onNotified();
+}
+
+void StateDispatcher::handleCancel()
+{
+    if (_currentState == nullptr)
+    {
+        return;
+    }
+
+    _currentState->handleCancel();
     onNotified();
 }
 

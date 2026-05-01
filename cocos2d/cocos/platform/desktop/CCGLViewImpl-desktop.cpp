@@ -733,9 +733,11 @@ void GLViewImpl::onGLFWMouseScrollCallback(GLFWwindow* window, double x, double 
 
 void GLViewImpl::onGLFWKeyCallback(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
-    if (GLFW_REPEAT != action)
     {
-        EventKeyboard event(g_keyCodeMap[key], GLFW_PRESS == action);
+        // Treat GLFW_REPEAT (OS key auto-repeat) as another press so cursor
+        // movement and menu navigation step continuously while a key is held.
+        bool isPressed = (action == GLFW_PRESS) || (action == GLFW_REPEAT);
+        EventKeyboard event(g_keyCodeMap[key], isPressed);
         auto dispatcher = Director::getInstance()->getEventDispatcher();
         dispatcher->dispatchEvent(&event);
     }

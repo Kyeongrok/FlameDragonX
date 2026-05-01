@@ -40,7 +40,8 @@ public:
     virtual void onExitState();
     
     virtual void handleClickAt(Vec2 position);
-    
+    virtual void handleCancel() {}
+
 };
 
 #endif /* ActionState_hpp */

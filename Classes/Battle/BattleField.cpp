@@ -143,6 +143,7 @@ void BattleField::initWithChapter(int chapterId)
                     }
                 }
                 if (hasMenu) this->closeMenu(true);
+                this->_stateDispatcher->handleCancel();
                 return;
             }
             default: return;
