@@ -122,7 +122,8 @@ void BattleField::initWithChapter(int chapterId)
     // Keyboard navigation: arrow keys move cursor, Enter/Space confirms
     auto kbListener = EventListenerKeyboard::create();
     kbListener->onKeyPressed = [this](EventKeyboard::KeyCode code, Event*) {
-        if (this->isInteractiveBusy()) return;
+        // ESC must work even when activity queue is busy, so the user can always cancel.
+        if (code != EventKeyboard::KeyCode::KEY_ESCAPE && this->isInteractiveBusy()) return;
         Vec2 pos = this->getCursorPosition();
         Vec2 target = pos;
         switch (code) {
@@ -143,6 +144,7 @@ void BattleField::initWithChapter(int chapterId)
                     }
                 }
                 if (hasMenu) this->closeMenu(true);
+                this->removeAllIndicators();
                 this->_stateDispatcher->handleCancel();
                 return;
             }
@@ -499,6 +501,12 @@ void BattleField::addCreature(Creature * creature, Vec2 position)
 
 void BattleField::removeObject(BattleObject * obj)
 {
+    // Save sprite pointer before list erasure: eraseObject decrements refcount
+    // and can delete obj if the list held the last reference, leaving obj->getSprite()
+    // as a dangling read.
+    Sprite * sprite = obj->getSprite();
+    _groundImage->removeChild(sprite, false);
+
     if (obj->getObjectType() == BattleObject_Creature)
     {
         Creature * creature = (Creature *)obj;
@@ -521,9 +529,6 @@ void BattleField::removeObject(BattleObject * obj)
     {
         this->_battleObjectList->eraseObject(obj);
     }
-    
-    _groundImage->removeChild(obj->getSprite(), false);
-    
 }
 
 Treasure * BattleField::getTreasureAt(Vec2 position)

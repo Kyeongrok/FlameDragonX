@@ -139,9 +139,9 @@ bool TitleLayer::init()
 
     std::vector<Button*> menuButtons = { buttonStart, buttonLoad, buttonContinue };
     auto selected = std::make_shared<int>(0);
-    auto applySelection = [menuButtons, selected]() {
+    auto applySelection = [menuButtons, selected, scaleFactor]() {
         for (size_t i = 0; i < menuButtons.size(); ++i) {
-            menuButtons[i]->setScale(((int)i == *selected) ? 1.7f : 1.5f);
+            menuButtons[i]->setScale(scaleFactor * (((int)i == *selected) ? 1.7f : 1.5f));
         }
     };
     applySelection();

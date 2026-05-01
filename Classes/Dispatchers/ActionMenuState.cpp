@@ -111,16 +111,20 @@ void ActionMenuState::handleClickAt(Vec2 position)
 void ActionMenuState::handleCancel()
 {
     _battleField->closeMenu(true);
+    _battleField->removeAllIndicators();
 
     if (_creature->hasTakenAction())
     {
         _battleScene->creatureEndTurn(_creature);
-        _nextState = IdleState::create(_battleScene);
     }
     else
     {
-        _nextState = ShowMoveScopeState::create(_battleScene, _session);
+        // Revert the move: put the creature back where it started.
+        _battleField->setObjectPosition(_creature, _session->creaturePositionBeforeMove);
+        _creature->setMoved(false);
     }
+
+    _nextState = IdleState::create(_battleScene);
 }
 
 void ActionMenuState::selectMagic()
