@@ -6,14 +6,17 @@ USING_NS_CC;
 
 const char* SettingLayer::KEY_STORY_ENABLED   = "storyEventsEnabled";
 const char* SettingLayer::KEY_DIALOG_FONT_SIZE = "dialogFontSize";
+const char* SettingLayer::KEY_WINDOW_SCALE    = "windowScale";
 
 static const char* FONT = "fonts/arial.ttf";
 static const int FONT_SIZE_OPTIONS[] = { 12, 14, 18, 24 };
 static const int FONT_SIZE_COUNT = 4;
-static const int MENU_COUNT = 3;
+static const int WINDOW_SCALE_OPTIONS[] = { 1, 2, 3, 4 };
+static const int WINDOW_SCALE_COUNT = 4;
+static const int MENU_COUNT = 4;
 
 namespace {
-    Label * _menuLabels[MENU_COUNT] = { nullptr, nullptr, nullptr };
+    Label * _menuLabels[MENU_COUNT] = { nullptr, nullptr, nullptr, nullptr };
 }
 
 bool SettingLayer::init()
@@ -52,13 +55,31 @@ bool SettingLayer::init()
     this->addChild(_fontValueLabel);
     updateFontLabel();
 
+    auto resolutionLabel = Label::createWithTTF("Resolution", FONT, 18);
+    resolutionLabel->setAnchorPoint(Vec2(0, 0.5f));
+    resolutionLabel->setPosition(screen.width / 2 - 130, lineY - lineGap * 2);
+    this->addChild(resolutionLabel);
+
+    _resolutionValueLabel = Label::createWithTTF("1440x960", FONT, 18);
+    _resolutionValueLabel->setAnchorPoint(Vec2(1, 0.5f));
+    _resolutionValueLabel->setPosition(screen.width / 2 + 130, lineY - lineGap * 2);
+    this->addChild(_resolutionValueLabel);
+    updateResolutionLabel();
+
+    _resolutionHintLabel = Label::createWithTTF("(restart required)", FONT, 12);
+    _resolutionHintLabel->setAnchorPoint(Vec2(0.5f, 0.5f));
+    _resolutionHintLabel->setPosition(screen.width / 2, lineY - lineGap * 2 - 20);
+    _resolutionHintLabel->setColor(Color3B(180, 180, 180));
+    this->addChild(_resolutionHintLabel);
+
     auto backLabel = Label::createWithTTF("Back", FONT, 18);
-    backLabel->setPosition(screen.width / 2, lineY - lineGap * 2 - 10);
+    backLabel->setPosition(screen.width / 2, lineY - lineGap * 3 - 20);
     this->addChild(backLabel);
 
     _menuLabels[0] = _storyValueLabel;
     _menuLabels[1] = _fontValueLabel;
-    _menuLabels[2] = backLabel;
+    _menuLabels[2] = _resolutionValueLabel;
+    _menuLabels[3] = backLabel;
     _selectedIndex = 0;
     updateSelection();
 
@@ -77,6 +98,7 @@ bool SettingLayer::init()
                 updateSelection();
                 if (i == 0) toggleStory();
                 else if (i == 1) cycleFontSize();
+                else if (i == 2) cycleResolution();
                 else backToTitle();
                 return true;
             }
@@ -98,12 +120,14 @@ bool SettingLayer::init()
             case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
                 if (_selectedIndex == 0) toggleStory();
                 else if (_selectedIndex == 1) cycleFontSize();
+                else if (_selectedIndex == 2) cycleResolution();
                 break;
             case EventKeyboard::KeyCode::KEY_ENTER:
             case EventKeyboard::KeyCode::KEY_KP_ENTER:
             case EventKeyboard::KeyCode::KEY_SPACE:
                 if (_selectedIndex == 0) toggleStory();
                 else if (_selectedIndex == 1) cycleFontSize();
+                else if (_selectedIndex == 2) cycleResolution();
                 else backToTitle();
                 break;
             case EventKeyboard::KeyCode::KEY_ESCAPE:
@@ -163,6 +187,29 @@ void SettingLayer::cycleFontSize()
     UserDefault::getInstance()->setIntegerForKey(KEY_DIALOG_FONT_SIZE, next);
     UserDefault::getInstance()->flush();
     updateFontLabel();
+}
+
+void SettingLayer::updateResolutionLabel()
+{
+    int scale = UserDefault::getInstance()->getIntegerForKey(KEY_WINDOW_SCALE, DEFAULT_WINDOW_SCALE);
+    char buf[32];
+    snprintf(buf, sizeof(buf), "%dx%d",
+             Constants::ORIGIN_SCREEN_WIDTH * scale,
+             Constants::ORIGIN_SCREEN_HEIGHT * scale);
+    _resolutionValueLabel->setString(buf);
+}
+
+void SettingLayer::cycleResolution()
+{
+    int current = UserDefault::getInstance()->getIntegerForKey(KEY_WINDOW_SCALE, DEFAULT_WINDOW_SCALE);
+    int idx = 0;
+    for (int i = 0; i < WINDOW_SCALE_COUNT; ++i) {
+        if (WINDOW_SCALE_OPTIONS[i] == current) { idx = i; break; }
+    }
+    int next = WINDOW_SCALE_OPTIONS[(idx + 1) % WINDOW_SCALE_COUNT];
+    UserDefault::getInstance()->setIntegerForKey(KEY_WINDOW_SCALE, next);
+    UserDefault::getInstance()->flush();
+    updateResolutionLabel();
 }
 
 void SettingLayer::backToTitle()

@@ -4,6 +4,7 @@
 #include "Constants.hpp"
 #include "DataStore.hpp"
 #include "LocalizedStrings.hpp"
+#include "SettingLayer.hpp"
 
 USING_NS_CC;
 
@@ -44,7 +45,12 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto glview = director->getOpenGLView();
     if(!glview) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-        glview = GLViewImpl::createWithRect("FlameDragonX", cocos2d::Rect(0, 0, 1440, 960));
+        int scale = UserDefault::getInstance()->getIntegerForKey(
+            SettingLayer::KEY_WINDOW_SCALE, SettingLayer::DEFAULT_WINDOW_SCALE);
+        if (scale < 1 || scale > 8) scale = SettingLayer::DEFAULT_WINDOW_SCALE;
+        float winW = (float)(Constants::ORIGIN_SCREEN_WIDTH * scale);
+        float winH = (float)(Constants::ORIGIN_SCREEN_HEIGHT * scale);
+        glview = GLViewImpl::createWithRect("FlameDragonX", cocos2d::Rect(0, 0, winW, winH));
 #else
         glview = GLViewImpl::create("FlameDragonX");
 #endif
