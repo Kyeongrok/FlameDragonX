@@ -30,7 +30,8 @@ public:
     void onExitState() override;
     
     void handleClickAt(Vec2 position) override;
-    
+    void handleCancel() override;
+
     void selectMagic();
     void confirmSelectMagic(int result);
     

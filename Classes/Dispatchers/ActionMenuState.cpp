@@ -108,6 +108,21 @@ void ActionMenuState::handleClickAt(Vec2 position)
     
 }
 
+void ActionMenuState::handleCancel()
+{
+    _battleField->closeMenu(true);
+
+    if (_creature->hasTakenAction())
+    {
+        _battleScene->creatureEndTurn(_creature);
+        _nextState = IdleState::create(_battleScene);
+    }
+    else
+    {
+        _nextState = ShowMoveScopeState::create(_battleScene, _session);
+    }
+}
+
 void ActionMenuState::selectMagic()
 {
     CompositeBox * magicBox = new CompositeBox(_creature, MessageBoxType_Magic, MessageBoxOperatingType_Select);

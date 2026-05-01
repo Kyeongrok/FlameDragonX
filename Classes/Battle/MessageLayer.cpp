@@ -36,6 +36,9 @@ MessageLayer::MessageLayer(BattleScene * scene)
             case EventKeyboard::KeyCode::KEY_SPACE:
                 _activeMessage->handleClick(Vec2::ZERO);
                 break;
+            case EventKeyboard::KeyCode::KEY_ESCAPE:
+                _activeMessage->handleCancel();
+                break;
             default: break;
         }
     };

@@ -66,7 +66,13 @@ void Message::removeDialog()
 void Message::handleClick(Vec2 location)
 {
     _returnValue = 0;
-    
+
+    this->closeDialog();
+}
+
+void Message::handleCancel()
+{
+    _returnValue = -1;
     this->closeDialog();
 }
 

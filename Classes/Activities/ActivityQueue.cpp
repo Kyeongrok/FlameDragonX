@@ -95,11 +95,12 @@ void ActivityQueue::takeTick(int synchronizedTick)
         _appendToIndex = 0;
     }
     
-    for (FDActivity * activity :  *(this->_singleActivityList)) {
+    for (long i = (long)this->_singleActivityList->size() - 1; i >= 0; i--) {
+        FDActivity * activity = this->_singleActivityList->at(i);
         activity->takeTick(synchronizedTick);
-        
+
         if (activity->hasFinished()) {
-            this->_singleActivityList->eraseObject(activity);
+            this->_singleActivityList->erase(i);
         }
     }
 }
