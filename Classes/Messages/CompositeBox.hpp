@@ -57,6 +57,8 @@ public:
     FDActivity * onExitActivity() override;
     
     void handleClick(Vec2 location) override;
+    void handleNavigate(int dx, int dy) override;
+    void handleConfirm() override;
     /// void handleReturnValue(int value) override;
     
     

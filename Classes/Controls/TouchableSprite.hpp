@@ -28,7 +28,9 @@ public:
     
     void setCallback(Ref * obj, SEL_CALLBACK0 callback);
     void setCallback(Ref * obj, SEL_CALLBACK1 callback);
-    
+
+    void triggerCallback();
+
     bool onSpriteTouchBegin(Touch* touch, Event* event);
     void onSpriteTouched(Touch* touch, Event* event);
 };

@@ -29,8 +29,9 @@ MagicBox::MagicBox(Creature * creature, MessageBoxOperatingType type, Ref* calle
         
         if (_operatingType == MessageBoxOperatingType_Select) {
             nameLabel->setCallback(caller, method);
+            this->registerSelectable(nameLabel, i);
         }
-        
+
         _baseSprite->addLabel(nameLabel, Vec2(locationX, locationY));
         
         // Attribute

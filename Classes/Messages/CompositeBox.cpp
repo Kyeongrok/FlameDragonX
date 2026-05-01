@@ -113,6 +113,25 @@ FDActivity * CompositeBox::onExitActivity()
     return batchActivity;
 }
 
+void CompositeBox::handleNavigate(int dx, int dy)
+{
+    if (_mainBox == nullptr) return;
+    // Items in ItemBox/MagicBox are arranged in columns of 4 rows.
+    // UP/DOWN moves within a column; LEFT/RIGHT jumps a column (4 entries).
+    if (dy != 0) {
+        _mainBox->navigate(dy);
+    } else if (dx != 0) {
+        _mainBox->navigate(dx * 4);
+    }
+}
+
+void CompositeBox::handleConfirm()
+{
+    if (_mainBox != nullptr) {
+        _mainBox->confirmSelected();
+    }
+}
+
 void CompositeBox::handleClick(Vec2 location)
 {
     Size screenSize = Constants::getScreenSize();

@@ -51,6 +51,8 @@ public:
     
     virtual void handleClick(Vec2 location);
     virtual void handleCancel();
+    virtual void handleNavigate(int dx, int dy);
+    virtual void handleConfirm();
     virtual void handleReturnValue(int value);
     
     bool isBlocking();

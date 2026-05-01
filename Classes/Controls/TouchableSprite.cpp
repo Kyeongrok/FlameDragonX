@@ -66,7 +66,21 @@ bool TouchableSprite::onSpriteTouchBegin(Touch* touch, Event* event)
 void TouchableSprite::onSpriteTouched(Touch* touch, Event* event)
 {
     int tag = event->getCurrentTarget()->getTag();
-    
+
+    if (_callbackObject != nullptr && _callbackMethod0 != nullptr) {
+        CallbackMethod * method = CallbackMethod::create(_callbackObject, _callbackMethod0);
+        method->execute();
+    }
+    if (_callbackObject != nullptr && _callbackMethod1 != nullptr && tag != -1) {
+        CallbackMethod * method = CallbackMethod::create(_callbackObject, _callbackMethod1, tag);
+        method->execute();
+    }
+}
+
+void TouchableSprite::triggerCallback()
+{
+    int tag = this->getTag();
+
     if (_callbackObject != nullptr && _callbackMethod0 != nullptr) {
         CallbackMethod * method = CallbackMethod::create(_callbackObject, _callbackMethod0);
         method->execute();

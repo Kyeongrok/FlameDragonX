@@ -76,6 +76,17 @@ void Message::handleCancel()
     this->closeDialog();
 }
 
+void Message::handleNavigate(int /*dx*/, int /*dy*/)
+{
+    // Default: no-op. Subclasses with selectable items override.
+}
+
+void Message::handleConfirm()
+{
+    // Default: treat ENTER as a click at origin (existing semantics).
+    this->handleClick(Vec2::ZERO);
+}
+
 void Message::closeDialog()
 {
     FDActivity * activity = onExitActivity();

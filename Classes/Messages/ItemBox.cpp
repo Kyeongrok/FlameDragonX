@@ -52,6 +52,7 @@ ItemBox::ItemBox(Creature * creature, MessageBoxOperatingType type, Ref* caller,
         nameLabel->setTag(i);
         if (this->isSelectable(item)) {
             nameLabel->setCallback(caller, method);
+            this->registerSelectable(nameLabel, i);
         }
         _baseSprite->addLabel(nameLabel, Vec2(locationX + 10, locationY));
         

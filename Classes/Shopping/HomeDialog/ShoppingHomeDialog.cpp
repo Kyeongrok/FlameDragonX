@@ -23,20 +23,55 @@ using namespace std;
 void ShoppingHomeDialog::showDialog(ShoppingLayer * layer)
 {
     ShoppingDialog::showDialog(layer);
-    
+
     // Show the buttons
     this->generateButtons();
-    
+
     int posX = _baseSprite->getContentSize().width;
     int posY = 20;
-    
+
     for (TouchableSprite * button : _buttons) {
         _baseSprite->addChild(button, Vec2(posX, posY));
         posX += 30;
     }
-    
+
     _message = nullptr;
     initMessage();
+
+    // Keyboard navigation between the icon buttons.
+    _selectedButtonIndex = (_buttons.size() > 0) ? 0 : -1;
+    applyButtonHighlight();
+
+    auto kbListener = EventListenerKeyboard::create();
+    kbListener->onKeyPressed = [this](EventKeyboard::KeyCode code, Event*) {
+        if (_buttons.size() == 0) return;
+        switch (code) {
+            case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
+                _selectedButtonIndex = (_selectedButtonIndex - 1 + (int)_buttons.size()) % (int)_buttons.size();
+                applyButtonHighlight();
+                break;
+            case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
+                _selectedButtonIndex = (_selectedButtonIndex + 1) % (int)_buttons.size();
+                applyButtonHighlight();
+                break;
+            case EventKeyboard::KeyCode::KEY_ENTER:
+            case EventKeyboard::KeyCode::KEY_KP_ENTER:
+            case EventKeyboard::KeyCode::KEY_SPACE:
+                if (_selectedButtonIndex >= 0 && _selectedButtonIndex < (int)_buttons.size()) {
+                    _buttons.at(_selectedButtonIndex)->triggerCallback();
+                }
+                break;
+            default: break;
+        }
+    };
+    _layer->getEventDispatcher()->addEventListenerWithSceneGraphPriority(kbListener, _baseSprite);
+}
+
+void ShoppingHomeDialog::applyButtonHighlight()
+{
+    for (int i = 0; i < (int)_buttons.size(); ++i) {
+        _buttons.at(i)->setScale(((int)i == _selectedButtonIndex) ? 1.2f : 1.0f);
+    }
 }
 
 void ShoppingHomeDialog::generateButtons()

@@ -57,7 +57,26 @@ ShoppingLayer::ShoppingLayer(ChapterRecord * chapterRecord, ShopType type)
     auto touchListener = EventListenerTouchOneByOne::create();
     touchListener->onTouchBegan = CC_CALLBACK_2(ShoppingLayer::onClicked, this);
     this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(touchListener, this);
-    
+
+    // ESC: close active message → close active sub-dialog → leave the shop.
+    auto kbListener = EventListenerKeyboard::create();
+    kbListener->onKeyPressed = [this](EventKeyboard::KeyCode code, Event*) {
+        if (code != EventKeyboard::KeyCode::KEY_ESCAPE) return;
+
+        if (_activeMessage != nullptr) {
+            _activeMessage->handleCancel();
+            return;
+        }
+        if (_activeDialog != nullptr) {
+            _activeDialog->closeDialog();
+            return;
+        }
+        auto f = [](Scene* scene) {
+            return TransitionFade::create(1.0f, scene);
+        };
+        Director::getInstance()->popScene(f);
+    };
+    this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(kbListener, this);
 }
 
 void ShoppingLayer::setActiveDialog(ShoppingDialog * dialog)

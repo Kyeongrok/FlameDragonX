@@ -34,10 +34,22 @@ MessageLayer::MessageLayer(BattleScene * scene)
             case EventKeyboard::KeyCode::KEY_ENTER:
             case EventKeyboard::KeyCode::KEY_KP_ENTER:
             case EventKeyboard::KeyCode::KEY_SPACE:
-                _activeMessage->handleClick(Vec2::ZERO);
+                _activeMessage->handleConfirm();
                 break;
             case EventKeyboard::KeyCode::KEY_ESCAPE:
                 _activeMessage->handleCancel();
+                break;
+            case EventKeyboard::KeyCode::KEY_UP_ARROW:
+                _activeMessage->handleNavigate(0, -1);
+                break;
+            case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
+                _activeMessage->handleNavigate(0, +1);
+                break;
+            case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
+                _activeMessage->handleNavigate(-1, 0);
+                break;
+            case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
+                _activeMessage->handleNavigate(+1, 0);
                 break;
             default: break;
         }

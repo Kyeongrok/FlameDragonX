@@ -153,6 +153,14 @@ void BattleField::initWithChapter(int chapterId)
         if (target.x < 1 || target.y < 1 ||
             target.x > this->_fieldWidth || target.y > this->_fieldHeight) return;
         this->setCursorTo(target);
+
+        // If a menu is open and the cursor landed on a valid menu item,
+        // highlight it (so arrow keys navigate the cross-shaped menu).
+        MenuCursor * menuAtCursor = (MenuCursor *)this->getObjectByPosition(BattleObject_Menu, target);
+        if (menuAtCursor != nullptr && menuAtCursor->isValid())
+        {
+            this->setActiveMenuCursor(menuAtCursor);
+        }
     };
     _eventDispatcher->addEventListenerWithSceneGraphPriority(kbListener, this);
     

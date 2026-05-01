@@ -25,7 +25,11 @@ protected:
     Label * _message;
     
     Vector<TouchableSprite *> _buttons;
-    
+
+    int _selectedButtonIndex;
+
+    void applyButtonHighlight();
+
 public:
     
     /// ShoppingHomeDialog(ChapterRecord * record);
